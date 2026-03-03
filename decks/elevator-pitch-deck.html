@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vehicle Identity</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --paper:#F2EFE8;--cream:#E8E4DC;--ink:#1a1916;--mid:#6b6560;
+  --light:#B0A898;--rule:#D9D5CB;--accent:#1847D4;--warm:#C4460E;--green:#1A7A4A;
+  --serif:'DM Serif Display',Georgia,serif;
+  --sans:'DM Sans',system-ui,sans-serif;
+  --mono:'Space Mono',monospace;
+}
+html,body{width:100%;height:100%;background:#111;overflow:hidden;}
+#deck{width:100vw;height:100vh;display:flex;align-items:center;justify-content:center;}
+.sw{position:relative;width:min(100vw,calc(100vh*16/9));height:min(100vh,calc(100vw*9/16));}
+.slide{position:absolute;inset:0;overflow:hidden;opacity:0;pointer-events:none;transition:opacity .4s ease;background:var(--paper);}
+.slide.active{opacity:1;pointer-events:all;}
+.bnum{position:absolute;right:-2%;top:-10%;font-family:var(--serif);font-size:52vmin;color:rgba(210,205,192,0.38);line-height:1;pointer-events:none;user-select:none;letter-spacing:-.04em;z-index:0;}
+.ts{position:absolute;top:0;left:0;right:0;height:9%;display:flex;align-items:center;padding:0 5%;border-bottom:1px solid var(--rule);z-index:2;background:var(--paper);}
+.tsl{font-family:var(--mono);font-size:1.15vmin;letter-spacing:.2em;color:var(--light);text-transform:uppercase;}
+.tst{font-family:var(--mono);font-size:1.15vmin;letter-spacing:.12em;color:var(--accent);margin-left:3%;}
+.tsn{margin-left:auto;font-family:var(--mono);font-size:1.15vmin;color:var(--rule);letter-spacing:.08em;}
+.mn{position:absolute;top:9%;bottom:0;left:0;right:0;padding:4.5% 5%;z-index:1;}
+.ey{font-family:var(--mono);font-size:1.15vmin;letter-spacing:.2em;color:var(--light);text-transform:uppercase;margin-bottom:2%;}
+.ey.ac{color:var(--accent);}.ey.wm{color:var(--warm);}
+.big{font-family:var(--serif);font-size:5.5vmin;color:var(--ink);line-height:1.15;letter-spacing:-.02em;}
+.big em{font-style:italic;color:var(--warm);}.big.blue em{color:var(--accent);}
+.bod{font-family:var(--sans);font-size:1.78vmin;color:var(--mid);line-height:1.65;font-weight:300;}
+.bod strong{color:var(--ink);font-weight:500;}
+.cn{font-family:var(--serif);font-size:3vmin;color:var(--rule);margin-bottom:1.5%;}
+.ct{font-family:var(--serif);font-size:2.15vmin;color:var(--ink);margin-bottom:3%;line-height:1.2;}
+.cb{font-family:var(--sans);font-size:1.6vmin;color:var(--mid);line-height:1.6;font-weight:300;}
+.cb strong{color:var(--ink);font-weight:500;}
+.nt{font-family:var(--mono);font-size:1.1vmin;color:var(--light);line-height:1.5;letter-spacing:.03em;}
+.tc3{display:grid;grid-template-columns:1fr 1px 1fr 1px 1fr;gap:0;height:100%;}
+.two{display:grid;grid-template-columns:58% 42%;height:100%;}
+.twe{display:grid;grid-template-columns:1fr 1px 1fr;height:100%;}
+.vr{background:var(--rule);}
+.cpf{padding:0 4.5% 0 0;}.cp{padding:0 4.5%;}.cpl{padding:0 0 0 4.5%;}
+.aside{background:var(--cream);border-left:1px solid var(--rule);padding:4.5% 4%;}
+.ir{display:flex;align-items:flex-start;gap:3%;padding:3.5% 0;border-bottom:1px solid var(--rule);}
+.ir:last-child{border-bottom:none;}
+.id{width:1.8vmin;height:1.8vmin;border-radius:50%;border:1.5px solid var(--accent);flex-shrink:0;margin-top:.5vmin;}
+.id.f{background:var(--accent);border-color:var(--accent);}
+.ib{font-family:var(--sans);font-size:1.55vmin;color:var(--mid);line-height:1.5;font-weight:300;}
+.si{margin-bottom:4%;}
+.sr{display:flex;justify-content:space-between;font-family:var(--mono);font-size:1.2vmin;color:var(--mid);margin-bottom:1.5%;}
+.sr span:last-child{color:var(--ink);font-weight:700;}
+.str{height:3px;background:var(--rule);position:relative;overflow:hidden;border-radius:2px;}
+.sf{position:absolute;left:0;top:0;bottom:0;width:0;border-radius:2px;animation:gb 1s ease forwards;animation-delay:var(--d,.3s);}
+@keyframes gb{to{width:var(--w);}}
+.fs{display:flex;align-items:flex-start;gap:3%;padding:3.2% 0;border-bottom:1px solid var(--rule);}
+.fs:last-child{border-bottom:none;}
+.fn{font-family:var(--serif);font-size:2.8vmin;color:var(--rule);flex-shrink:0;width:6%;line-height:1;}
+.fn.bl{color:var(--accent);}
+.fst{font-family:var(--serif);font-size:1.96vmin;color:var(--ink);margin-bottom:.8%;}
+.fsb{font-family:var(--sans);font-size:1.55vmin;color:var(--mid);line-height:1.5;font-weight:300;}
+.qb{display:flex;gap:2.5%;margin-bottom:4%;padding-bottom:4%;border-bottom:1px solid var(--rule);}
+.qbar{width:3px;flex-shrink:0;background:var(--accent);border-radius:2px;}
+.qt{font-family:var(--serif);font-size:2.1vmin;font-style:italic;color:var(--mid);line-height:1.5;}
+.ab2{flex:1;border:1px solid var(--rule);padding:3% 3.5%;background:var(--cream);}
+.ab2.bl{background:#EEF1FD;border-color:var(--accent);}
+.al{font-family:var(--mono);font-size:1.1vmin;letter-spacing:.15em;color:var(--light);text-transform:uppercase;margin-bottom:1.5%;}
+.ab2.bl .al{color:var(--accent);}
+.at2{font-family:var(--sans);font-size:1.85vmin;font-weight:600;color:var(--ink);}
+.as2{font-family:var(--sans);font-size:1.45vmin;color:var(--light);}
+.ab2.bl .as2{color:var(--accent);}
+.ar{display:flex;align-items:center;gap:2%;margin-bottom:4%;}
+.aro{display:flex;flex-direction:column;align-items:center;gap:3px;width:8%;flex-shrink:0;}
+.arl{font-family:var(--mono);font-size:1.1vmin;color:var(--accent);letter-spacing:.1em;}
+.arln{width:100%;height:2px;background:var(--accent);position:relative;}
+.arln::after{position:absolute;right:-3px;top:-5px;font-size:8px;color:var(--accent);}
+.gr{display:flex;align-items:center;gap:2.5%;padding:2.5% 0;border-bottom:1px solid var(--rule);}
+.gr:last-child{border-bottom:none;}
+.gd{width:1.6vmin;height:1.6vmin;border-radius:50%;flex-shrink:0;}
+.gl{font-family:var(--sans);font-size:1.7vmin;color:var(--mid);font-weight:300;flex:1;}
+.gv{font-family:var(--mono);font-size:1.5vmin;font-weight:700;}
+.oc{display:grid;grid-template-columns:1fr 1fr 1fr;height:100%;}
+.oi{padding:4.5% 4.5%;border-right:1px solid var(--rule);display:flex;flex-direction:column;}
+.oi:last-child{border-right:none;}
+.otag{font-family:var(--mono);font-size:1.1vmin;letter-spacing:.15em;text-transform:uppercase;font-weight:700;margin-bottom:4%;padding:1% 2%;display:inline-block;}
+.oy{font-family:var(--serif);font-size:5.2vmin;line-height:1;letter-spacing:-.02em;margin-bottom:3%;}
+.ott{font-family:var(--serif);font-size:2.04vmin;margin-bottom:4%;padding-bottom:4%;border-bottom:1px solid var(--rule);}
+.ob{font-family:var(--sans);font-size:1.6vmin;color:var(--mid);line-height:1.6;font-weight:300;}
+.sq{display:flex;gap:2.5%;padding:2.2% 0;border-bottom:1px solid var(--rule);}
+.sq:last-child{border-bottom:none;}
+.sqn{font-family:var(--serif);font-size:2.5vmin;color:var(--rule);flex-shrink:0;width:5%;}
+.sqn.lv{color:var(--accent);}
+.sqt{font-family:var(--sans);font-size:1.65vmin;color:var(--mid);line-height:1.5;font-weight:300;}
+.sqt strong{color:var(--ink);font-weight:500;}
+.wc{padding:3% 3.5%;border:1px solid var(--rule);background:var(--paper);margin-bottom:2%;}
+.wc:last-child{margin-bottom:0;}
+.wct{font-family:var(--serif);font-size:1.85vmin;color:var(--ink);margin-bottom:1%;}
+.wcb{font-family:var(--sans);font-size:1.5vmin;color:var(--mid);line-height:1.5;font-weight:300;}
+.dm{padding:2.8% 0;border-bottom:1px solid var(--rule);}
+.dm:last-child{border-bottom:none;}
+.dmn{font-family:var(--serif);font-size:1.85vmin;color:var(--accent);margin-bottom:.8%;}
+.dmb{font-family:var(--sans);font-size:1.55vmin;color:var(--mid);line-height:1.45;font-weight:300;}
+.ni{display:flex;gap:2.5%;padding:2.5% 0;border-bottom:1px solid var(--rule);}
+.ni:last-child{border-bottom:none;}
+.nb2{width:3px;height:2.4vmin;background:var(--accent);flex-shrink:0;margin-top:.3vmin;border-radius:1px;}
+.nit{font-family:var(--sans);font-size:1.7vmin;color:var(--mid);line-height:1.45;font-weight:300;}
+.nit strong{color:var(--ink);font-weight:500;}
+.la{padding:3% 0;border-bottom:1px solid var(--rule);}
+.la:last-child{border-bottom:none;}
+.lat{font-family:var(--serif);font-size:1.9vmin;color:var(--ink);margin-bottom:1%;}
+.lab{font-family:var(--sans);font-size:1.55vmin;color:var(--mid);line-height:1.45;font-weight:300;}
+#nav{position:fixed;bottom:2vh;left:50%;transform:translateX(-50%);display:flex;align-items:center;gap:12px;background:rgba(20,18,15,.9);padding:7px 15px;border-radius:40px;backdrop-filter:blur(8px);z-index:100;}
+.nb{width:28px;height:28px;border:1px solid rgba(255,255,255,.15);border-radius:50%;background:transparent;color:rgba(255,255,255,.5);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:12px;transition:all .2s;}
+.nb:hover{background:rgba(255,255,255,.08);color:#fff;}.nb:disabled{opacity:.15;cursor:default;}
+.dn{display:flex;gap:6px;align-items:center;}
+.dot{width:5px;height:5px;border-radius:50%;background:rgba(255,255,255,.18);cursor:pointer;transition:all .2s;}
+.dot.active{background:var(--accent);transform:scale(1.5);}
+#sc{font-family:var(--mono);font-size:10px;color:rgba(255,255,255,.3);min-width:38px;text-align:center;letter-spacing:.1em;}
+#hint{position:fixed;bottom:2vh;right:2vw;font-family:var(--mono);font-size:10px;color:rgba(255,255,255,.15);}
+</style></head><body>
+<div id="deck"><div class="sw">
+<!-- S01 COVER -->
+<div class="slide active" id="s01">
+  <div class="bnum">01</div>
+  <div class="ts"><span class="tsl">Vehicle Identity &amp; Secondary Market Trust Layer</span><span class="tsn">01 / 09</span></div>
+  <div class="mn" style="display:grid;grid-template-columns:58% 42%;height:91%;">
+    <div style="display:flex;flex-direction:column;justify-content:space-between;padding-right:5%;border-right:1px solid var(--rule);">
+      <div class="ey">Early Stage Overview</div>
+      <h1 class="big" style="font-size:12vmin;line-height:.94;letter-spacing:-.03em;">Trust<br>built<br><em>forward.</em></h1>
+      <p class="bod" style="padding-top:4%;border-top:1px solid var(--rule);">The secondary vehicle market has a structural problem. Service history exists &#8212; it is simply unstructured, unverifiable, and invisible at the moment it matters most.</p>
+    </div>
+    <div style="padding-left:5%;display:flex;flex-direction:column;justify-content:center;">
+      <div class="ey" style="margin-bottom:5%;padding-bottom:3%;border-bottom:1px solid var(--rule);">What this is about</div>
+      <div class="ir"><div class="id f"></div><p class="ib">A verification layer built from the service level up &#8212; not assembled from secondary sources, but constructed forward, event by event.</p></div>
+      <div class="ir"><div class="id f"></div><p class="ib">Workshops sign service events. Vehicles accumulate verified history. The result is a primary record: immutable, portable, structurally credible.</p></div>
+      <div class="ir"><div class="id f"></div><p class="ib">The goal: a market where verified history is a standard input in pricing, underwriting, and risk &#8212; not an exception.</p></div>
+    </div>
+  </div>
+</div>
+
+<!-- S02 THE PROBLEM -->
+<div class="slide" id="s02">
+  <div class="bnum">02</div>
+  <div class="ts"><span class="tsl">The Problem</span><span class="tst">Market Structure</span><span class="tsn">02 / 09</span></div>
+  <div class="mn" style="display:flex;flex-direction:column;height:91%;">
+    <div style="padding-bottom:4%;margin-bottom:4%;border-bottom:1px solid var(--rule);">
+      <p class="big" style="font-size:3.8vmin;max-width:80%;">Buyers make high-value decisions using information they <em>cannot verify.</em> The market rewards opacity and penalizes honesty.</p>
+    </div>
+    <div class="tc3" style="flex:1;">
+      <div class="cpf" style="display:flex;flex-direction:column;">
+        <div class="cn">01</div><div class="ct">History exists but can&#39;t be trusted</div>
+        <p class="cb">Service records are fragmented across paper, workshop systems, and WhatsApp. Non-standardized, non-portable, and trivially easy to fabricate or omit.</p>
+        <p class="nt" style="margin-top:auto;padding-top:3%;border-top:1px solid var(--rule);">Akerlof, 1970 &#8212; &#34;Market for Lemons&#34;: sellers know more than buyers; the market prices all vehicles as if they might be bad.</p>
+      </div>
+      <div class="vr"></div>
+      <div class="cp" style="display:flex;flex-direction:column;">
+        <div class="cn">02</div><div class="ct">Existing solutions are retrospective</div>
+        <p class="cb">History report providers aggregate what&#39;s already recorded in registries. They create <strong>no new signal</strong> &#8212; bounded by institutional data that wasn&#39;t designed for this purpose.</p>
+        <p class="nt" style="margin-top:auto;padding-top:3%;border-top:1px solid var(--rule);">Point-in-time inspections are useful. They cannot substitute for a documented longitudinal history of consistent maintenance.</p>
+      </div>
+      <div class="vr"></div>
+      <div class="cpl" style="display:flex;flex-direction:column;">
+        <div class="cn">03</div><div class="ct">Quality is invisible at point of sale</div>
+        <p class="cb">Well-maintained vehicles sell at the same price as neglected ones. Honest sellers are systematically underrewarded. <strong>The market selects against quality</strong> &#8212; exactly as Akerlof predicted.</p>
+        <p class="nt" style="margin-top:auto;padding-top:3%;border-top:1px solid var(--rule);">The lemons problem is not theoretical. It is the operating condition of the secondary vehicle market today.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- S03 THE INSIGHT -->
+<div class="slide" id="s03">
+  <div class="bnum">03</div>
+  <div class="ts"><span class="tsl">The Insight</span><span class="tst">Core Thesis</span><span class="tsn">03 / 09</span></div>
+  <div class="mn" style="display:flex;flex-direction:column;height:91%;">
+    <div style="padding-bottom:4%;margin-bottom:4%;border-bottom:1px solid var(--rule);">
+      <p class="big blue" style="font-size:5vmin;">Trust must be built <em>forward,</em><br>not reconstructed backward.</p>
+    </div>
+    <div class="tc3" style="flex:1;">
+      <div class="cpf" style="display:flex;flex-direction:column;">
+        <div class="cn">01</div><div class="ct">Where real information is created</div>
+        <p class="cb">The service layer &#8212; workshops, inspection centers, maintenance providers &#8212; is where information about actual vehicle condition is produced. Every repair, oil change, and measurement is a verifiable event with diagnostic significance.</p>
+      </div>
+      <div class="vr"></div>
+      <div class="cp" style="display:flex;flex-direction:column;">
+        <div class="cn">02</div><div class="ct">No new behavior required</div>
+        <p class="cb">Workshops <strong>already perform services.</strong> Owners <strong>already maintain vehicles.</strong> The raw material for verification is produced continuously &#8212; it is simply unstructured and unverifiable. The challenge is infrastructure, not habit change.</p>
+      </div>
+      <div class="vr"></div>
+      <div class="cpl" style="display:flex;flex-direction:column;">
+        <div class="cn">03</div><div class="ct">A primary record, not an aggregation</div>
+        <p class="cb">Signed at the moment of execution, by the actor with direct knowledge of the vehicle&#39;s state. Not assembled from registries. Not retrospective. A record that persists across every ownership change &#8212; becoming more valuable over time.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- S04 HOW IT WORKS -->
+<div class="slide" id="s04">
+  <div class="bnum">04</div>
+  <div class="ts"><span class="tsl">How It Works</span><span class="tst">Architecture</span><span class="tsn">04 / 09</span></div>
+  <div class="mn" style="height:91%;">
+    <div class="two">
+      <div style="padding-right:4%;display:flex;flex-direction:column;">
+        <div class="ar">
+          <div class="ab2"><div class="al">Proposal Layer</div><div class="at2">Owners &amp; Workshops</div><div class="as2">Editable &#183; Not authoritative</div></div>
+          <div class="aro"><div class="arl">SIGN</div><div class="arln"></div></div>
+          <div class="ab2 bl"><div class="al">Ledger Layer</div><div class="at2">Verified Nodes Only</div><div class="as2">Immutable &#183; Authoritative</div></div>
+        </div>
+        <div class="fs"><span class="fn bl">1</span><div><div class="fst">Workshop performs a service</div><p class="fsb">Oil change, repair, inspection &#8212; any event with diagnostic significance for the vehicle&#39;s state</p></div></div>
+        <div class="fs"><span class="fn">2</span><div><div class="fst">Verified node signs the event</div><p class="fsb">Timestamped, immutable, tied to the VIN. Node identity is recorded &#8212; accountability is structural</p></div></div>
+        <div class="fs"><span class="fn">3</span><div><div class="fst">Coverage accumulates passively</div><p class="fsb">Each signed event builds verified history on the vehicle &#8212; even before an owner has claimed it</p></div></div>
+        <div class="fs"><span class="fn">4</span><div><div class="fst">Signal enters the transaction</div><p class="fsb">The Official Vehicle Report travels into listings, negotiations, and financing as a portable trust artifact</p></div></div>
+      </div>
+      <div class="aside">
+        <div class="ey" style="margin-bottom:3%">The credibility gradient</div>
+        <div class="gr"><div class="gd" style="background:var(--light)"></div><span class="gl">Owner-reported, unverified</span><span class="gv" style="color:var(--light)">Low</span></div>
+        <div class="gr"><div class="gd" style="background:#E6A817"></div><span class="gl">Owner-reported + inspection confirms</span><span class="gv" style="color:#B87A10">Med</span></div>
+        <div class="gr"><div class="gd" style="background:var(--green)"></div><span class="gl">Professional execution, node-signed</span><span class="gv" style="color:var(--green)">High</span></div>
+        <div class="gr"><div class="gd" style="background:var(--green)"></div><span class="gl">Independent inspection, node-signed</span><span class="gv" style="color:var(--green)">High</span></div>
+        <div style="margin-top:5%;padding-top:4%;border-top:1px solid var(--rule);">
+          <div class="ey" style="margin-bottom:2%">What the signal is not</div>
+          <p class="bod" style="font-size:1.6vmin;">Not a score. Not a badge. A structured representation of how much of a vehicle&#39;s lifecycle has been independently verified &#8212; and where the gaps are.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- S05 ADOPTION MODEL -->
+<div class="slide" id="s05">
+  <div class="bnum">05</div>
+  <div class="ts"><span class="tsl">The Adoption Model</span><span class="tst">Supply First</span><span class="tsn">05 / 09</span></div>
+  <div class="mn" style="height:91%;">
+    <div class="two">
+      <div style="padding-right:4%;display:flex;flex-direction:column;">
+        <p class="bod" style="margin-bottom:4%;padding-bottom:4%;border-bottom:1px solid var(--rule);font-family:var(--serif);font-style:italic;font-size:1.85vmin;">The classic circular dependency: workshops won&#39;t sign if buyers don&#39;t care, buyers won&#39;t care if there&#39;s no signal. The model breaks it by ensuring <strong style="font-style:normal">workshops generate value for themselves before buyers care.</strong></p>
+        <div class="sq"><span class="sqn lv">1</span><p class="sqt"><strong>Workshops adopt</strong> for operational value &#8212; structured records, dispute protection, client certificates. No market recognition needed.</p></div>
+        <div class="sq"><span class="sqn">2</span><p class="sqt"><strong>Vehicles accumulate history passively</strong> as a byproduct of workshop activity, even before owners claim them.</p></div>
+        <div class="sq"><span class="sqn">3</span><p class="sqt"><strong>Owners discover</strong> their vehicle already has verified history. Passive accumulation converts inertia into engagement.</p></div>
+        <div class="sq"><span class="sqn">4</span><p class="sqt"><strong>The Official Report travels</strong> into listings and negotiations &#8212; normalizing the signal without platform-wide adoption.</p></div>
+        <div class="sq"><span class="sqn">5</span><p class="sqt"><strong>Buyer awareness grows,</strong> creating demand-side pull. Institutional actors develop appetite for programmatic access.</p></div>
+      </div>
+      <div class="aside">
+        <div class="ey" style="margin-bottom:3%">Why workshops adopt on day one</div>
+        <div class="wc"><div class="wct">Structured job registry</div><p class="wcb">Replaces paper logs with signed, portable, client-facing documentation of every service performed.</p></div>
+        <div class="wc"><div class="wct">Dispute protection</div><p class="wcb">Signed, timestamped records as evidence when work is questioned &#8212; a fundamentally stronger position than WhatsApp threads.</p></div>
+        <div class="wc"><div class="wct">Digital service certificates</div><p class="wcb">Exportable proof of professional work that travels with the vehicle into client hands.</p></div>
+        <div class="wc"><div class="wct">Professional differentiation</div><p class="wcb">Verified history attached to every vehicle serviced becomes a competitive edge from day one.</p></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- S06 HOW THE SIGNAL WORKS -->
+<div class="slide" id="s06">
+  <div class="bnum">06</div>
+  <div class="ts"><span class="tsl">How the Signal Works</span><span class="tst">Verification Coverage</span><span class="tsn">06 / 09</span></div>
+  <div class="mn" style="height:91%;">
+    <div class="two">
+      <div style="padding-right:4%;display:flex;flex-direction:column;">
+        <p class="bod" style="margin-bottom:4%;padding-bottom:4%;border-bottom:1px solid var(--rule);">Verification Coverage is not a score. It is a composite measure of how much of a vehicle&#39;s operational history has been validated by verified nodes &#8212; and how structurally coherent that history is.</p>
+        <div class="dm"><div class="dmn">Continuity</div><p class="dmb">How much of the vehicle&#39;s mileage is accounted for by signed events, without unexplained gaps. Not quantity of events &#8212; coherent progression.</p></div>
+        <div class="dm"><div class="dmn">Depth</div><p class="dmb">What proportion of the vehicle&#39;s operational life is documented. A vehicle with 8 years of history and 6 verified is more legible than one with only episodic records.</p></div>
+        <div class="dm"><div class="dmn">Integrity</div><p class="dmb">Whether the event timeline is structurally consistent &#8212; no odometer contradictions, no implausible sequences. Inconsistencies are recorded, not hidden.</p></div>
+        <p class="nt" style="margin-top:auto;padding-top:3%;border-top:1px solid var(--rule);">Coverage cannot be manufactured retroactively. It can only grow through genuine, forward-time node-signed events. That is what makes it a durable signal.</p>
+      </div>
+      <div class="aside">
+        <div class="ey" style="margin-bottom:4%">Coverage signal &#8212; example vehicle</div>
+        <div class="si"><div class="sr"><span>Continuity</span><span>73%</span></div><div class="str"><div class="sf" style="background:var(--accent);--w:73%;--d:.3s"></div></div></div>
+        <div class="si"><div class="sr"><span>Depth</span><span>61%</span></div><div class="str"><div class="sf" style="background:var(--accent);--w:61%;--d:.5s"></div></div></div>
+        <div class="si"><div class="sr"><span>Integrity</span><span>100%</span></div><div class="str"><div class="sf" style="background:var(--green);--w:100%;--d:.7s"></div></div></div>
+        <div class="si"><div class="sr"><span>Signed events</span><span>74%</span></div><div class="str"><div class="sf" style="background:var(--accent);--w:74%;--d:.9s"></div></div></div>
+        <div style="margin-top:4%;padding-top:4%;border-top:1px solid var(--rule);">
+          <div class="ey" style="margin-bottom:2%">What the signal does not claim</div>
+          <p class="bod" style="font-size:1.55vmin;">It does not certify a vehicle is defect-free. It represents what has been documented, independently signed, and how consistent and continuous that record is.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- S07 WHY NOW + LATAM -->
+<div class="slide" id="s07">
+  <div class="bnum">07</div>
+  <div class="ts"><span class="tsl">Why Now &#8212; and Why LATAM First</span><span class="tst">Market Timing</span><span class="tsn">07 / 09</span></div>
+  <div class="mn" style="height:91%;">
+    <div class="twe">
+      <div style="padding-right:4%;display:flex;flex-direction:column;">
+        <div class="ey" style="margin-bottom:3%">Conditions more favorable now than ever</div>
+        <div class="ni"><div class="nb2"></div><p class="nit"><strong>Workshop digitization</strong> is reaching critical mass &#8212; structured event capture is lower-friction than five years ago.</p></div>
+        <div class="ni"><div class="nb2"></div><p class="nit"><strong>Consumer expectations around provenance</strong> are shifting across categories. Receptivity to trust signal products is growing.</p></div>
+        <div class="ni"><div class="nb2"></div><p class="nit"><strong>Institutional appetite</strong> for structured vehicle lifecycle data is real and growing &#8212; in underwriting, fleet, and lending.</p></div>
+        <div class="ni"><div class="nb2"></div><p class="nit"><strong>Secondary market volume is expanding.</strong> As high-value transactions grow, the cost of information asymmetry becomes harder to ignore.</p></div>
+        <p class="bod" style="margin-top:auto;padding-top:3%;border-top:1px solid var(--rule);font-family:var(--serif);font-style:italic;font-size:1.75vmin;">The absence of a solution is not for lack of market demand. It is for lack of infrastructure built the right way.</p>
+      </div>
+      <div class="vr"></div>
+      <div style="padding-left:4%;display:flex;flex-direction:column;">
+        <div class="ey ac" style="margin-bottom:3%">The LATAM opportunity</div>
+        <div class="qb"><div class="qbar"></div><p class="qt">Where nothing is verified, credible verification carries higher relative value.</p></div>
+        <p class="bod" style="font-size:1.65vmin;margin-bottom:4%;">High informality is counterintuitively an advantage. The wedge is quality-conscious, digitally capable workshops where documentation has immediate operational value.</p>
+        <div class="la"><div class="lat">Informality premium</div><p class="lab">Credible history differentiates more sharply where the baseline is near zero.</p></div>
+        <div class="la"><div class="lat">Platform tailwinds</div><p class="lab">Rapidly growing digital marketplace adoption creates distribution channels that didn&#39;t exist a few years ago.</p></div>
+        <div class="la"><div class="lat">Deliberate wedge</div><p class="lab">Not the whole market &#8212; a narrow, high-visibility segment that proves value before broad rollout.</p></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- S08 OBJECTIVES -->
+<div class="slide" id="s08">
+  <div class="bnum">08</div>
+  <div class="ts"><span class="tsl">Objectives</span><span class="tst">Three Horizons</span><span class="tsn">08 / 09</span></div>
+  <div class="mn" style="display:flex;flex-direction:column;height:91%;">
+    <p class="bod" style="font-family:var(--serif);font-style:italic;font-size:1.96vmin;padding-bottom:3%;border-bottom:1px solid var(--rule);">Three horizons, one compounding arc.</p>
+    <div class="oc" style="flex:1;">
+      <div class="oi">
+        <div class="otag" style="background:#EEF1FD;color:var(--accent);">Near-term</div>
+        <div class="oy" style="color:var(--accent);">0&#8211;1<br>yrs</div>
+        <div class="ott" style="color:var(--accent);">Validate the adoption model</div>
+        <p class="ob">Onboard quality workshops as verified nodes in LATAM. Accumulate signed events. Prove the supply side works &#8212; and that workshop operational value is real &#8212; before committing to full infrastructure build.</p>
+      </div>
+      <div class="oi">
+        <div class="otag" style="background:#FDF6E3;color:#B87A10;">Mid-term</div>
+        <div class="oy" style="color:#B87A10;">1&#8211;3<br>yrs</div>
+        <div class="ott" style="color:#B87A10;">Get the signal into transactions</div>
+        <p class="ob">The Official Vehicle Report appears in listings, negotiations, and financing. Verified coverage becomes a recognized input in price discussions. Buyers begin requesting it; sellers begin referencing it.</p>
+      </div>
+      <div class="oi">
+        <div class="otag" style="background:#EAF5EF;color:var(--green);">Long-term</div>
+        <div class="oy" style="color:var(--green);">3+<br>yrs</div>
+        <div class="ott" style="color:var(--green);">Become market infrastructure</div>
+        <p class="ob">Insurers, lenders, and fleet operators incorporate the signal in risk models. A strong coverage record becomes a tradeable asset. The absence of verified history carries a visible, structural economic cost.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- S09 CLOSING -->
+<div class="slide" id="s09">
+  <div class="bnum" style="color:rgba(210,205,192,0.22);">09</div>
+  <div class="ts"><span class="tsl">Vehicle Identity &amp; Secondary Market Trust Layer</span><span class="tsn">09 / 09</span></div>
+  <div class="mn" style="display:grid;grid-template-columns:58% 42%;height:91%;">
+    <div style="display:flex;flex-direction:column;justify-content:space-between;padding-right:5%;border-right:1px solid var(--rule);">
+      <div class="ey wm">The end state</div>
+      <div>
+        <p class="big" style="font-size:4.2vmin;line-height:1.25;margin-bottom:5%;">A market where the absence of verified history carries a <em>visible economic cost</em> &#8212; and where a strong coverage record is a tradeable asset.</p>
+        <p class="bod" style="font-family:var(--serif);font-style:italic;">From narrative-based trust to infrastructure-based trust, anchored in the service layer.</p>
+      </div>
+      <p class="nt" style="padding-top:3%;border-top:1px solid var(--rule);">Built forward, one signed event at a time.</p>
+    </div>
+    <div style="padding-left:5%;display:flex;flex-direction:column;justify-content:center;">
+      <div class="ey" style="margin-bottom:5%;padding-bottom:3%;border-bottom:1px solid var(--rule);">Verification coverage signal</div>
+      <div class="si"><div class="sr"><span>Continuity</span><span>73%</span></div><div class="str"><div class="sf" style="background:var(--accent);--w:73%;--d:.3s"></div></div></div>
+      <div class="si"><div class="sr"><span>Depth</span><span>61%</span></div><div class="str"><div class="sf" style="background:var(--accent);--w:61%;--d:.5s"></div></div></div>
+      <div class="si"><div class="sr"><span>Integrity</span><span>100%</span></div><div class="str"><div class="sf" style="background:var(--green);--w:100%;--d:.7s"></div></div></div>
+      <div class="si"><div class="sr"><span>Signed events</span><span>74%</span></div><div class="str"><div class="sf" style="background:var(--accent);--w:74%;--d:.9s"></div></div></div>
+    </div>
+  </div>
+</div>
+
+</div></div>
+<nav id="nav">
+  <button class="nb" id="prev" disabled>&#8592;</button>
+  <div class="dn" id="dots"></div>
+  <span id="sc">01 / 09</span>
+  <button class="nb" id="next">&#8594;</button>
+</nav>
+<div id="hint">&#8592; &#8594; arrow keys</div>
+<script>
+const slides=document.querySelectorAll('.slide'),dc=document.getElementById('dots'),sc=document.getElementById('sc'),pv=document.getElementById('prev'),nx=document.getElementById('next');
+let c=0;const t=slides.length;
+slides.forEach((_,i)=>{const d=document.createElement('div');d.className='dot'+(i===0?' active':'');d.onclick=()=>go(i);dc.appendChild(d);});
+function go(n){slides[c].classList.remove('active');dc.children[c].classList.remove('active');c=Math.max(0,Math.min(n,t-1));slides[c].classList.add('active');dc.children[c].classList.add('active');sc.textContent=String(c+1).padStart(2,'0')+' / '+String(t).padStart(2,'0');pv.disabled=c===0;nx.disabled=c===t-1;}
+pv.onclick=()=>go(c-1);nx.onclick=()=>go(c+1);
+document.addEventListener('keydown',e=>{if(e.key==='ArrowRight'||e.key===' '){e.preventDefault();go(c+1);}if(e.key==='ArrowLeft'){e.preventDefault();go(c-1);}});
+let tx=null;
+document.addEventListener('touchstart',e=>{tx=e.touches[0].clientX;});
+document.addEventListener('touchend',e=>{if(tx===null)return;const dx=e.changedTouches[0].clientX-tx;if(Math.abs(dx)>40){dx<0?go(c+1):go(c-1);}tx=null;});
+</script>
+</body></html>
