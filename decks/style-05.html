@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Style 05 — Verified</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,300&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #f4f3f0;
+    --paper: #fafaf8;
+    --ink: #161513;
+    --mid: #58564f;
+    --light: #b0ada6;
+    --rule: #e2e0da;
+    --accent: #0e4fd4;
+    --warm: #c83c10;
+    --green: #1c7a46;
+    --sans: 'DM Sans', sans-serif;
+    --serif: 'Libre Baskerville', Georgia, serif;
+    --mono: 'DM Mono', monospace;
+  }
+
+  body {
+    background: #e3e1dc;
+    font-family: var(--sans);
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    padding: 40px;
+    min-height: 100vh;
+    align-items: center;
+  }
+
+  .label {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    color: #888;
+    text-transform: uppercase;
+    text-align: center;
+    margin-bottom: 8px;
+  }
+
+  .slide {
+    width: 960px;
+    aspect-ratio: 16/9;
+    background: var(--paper);
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 2px 24px rgba(0,0,0,0.09);
+  }
+
+  /* ── COVER ── */
+  .cover { display: grid; grid-template-rows: 52px 1fr 44px; }
+
+  .cover-topbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 56px;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .wordmark {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    color: var(--light);
+    text-transform: uppercase;
+  }
+
+  .status-pill {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--accent);
+    letter-spacing: 0.08em;
+    border: 1px solid #0e4fd422;
+    background: #0e4fd406;
+    padding: 5px 12px;
+  }
+
+  .dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--accent);
+    animation: blink 2s ease-in-out infinite;
+  }
+
+  @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.2} }
+
+  /* cover layout: left text + right panel */
+  .cover-body {
+    display: grid;
+    grid-template-columns: 1fr 288px;
+    overflow: hidden;
+  }
+
+  .cover-text-area {
+    padding: 48px 56px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .kicker {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.16em;
+    color: var(--accent);
+    text-transform: uppercase;
+  }
+
+  .headline-wrap {
+    flex: 1;
+    display: flex;
+    align-items: center;
+  }
+
+  .headline {
+    font-family: var(--serif);
+    font-size: 62px;
+    font-weight: 700;
+    color: var(--ink);
+    line-height: 1.0;
+    letter-spacing: -0.025em;
+  }
+
+  .headline .line2 {
+    font-weight: 400;
+    font-style: italic;
+    color: var(--accent);
+    display: block;
+  }
+
+  .tagline {
+    font-size: 13px;
+    color: var(--mid);
+    line-height: 1.65;
+    font-weight: 300;
+    max-width: 400px;
+    padding-top: 16px;
+    border-top: 1px solid var(--rule);
+  }
+
+  .cover-panel {
+    background: var(--ink);
+    padding: 28px 28px;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .panel-header {
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    color: #666;
+    text-transform: uppercase;
+    padding-bottom: 14px;
+    border-bottom: 1px solid #2a2a2a;
+    margin-bottom: 16px;
+  }
+
+  .sig-item {
+    margin-bottom: 14px;
+  }
+
+  .sig-row {
+    display: flex;
+    justify-content: space-between;
+    font-family: var(--mono);
+    font-size: 10px;
+    color: #888;
+    letter-spacing: 0.05em;
+    margin-bottom: 5px;
+  }
+
+  .sig-row span:last-child { color: #e8e8e4; }
+
+  .sig-track {
+    height: 2px;
+    background: #2a2a2a;
+    position: relative;
+  }
+
+  .sig-fill {
+    position: absolute; left:0; top:0; bottom:0;
+    animation: grow 1.1s ease forwards;
+    animation-delay: var(--d, 0s);
+    width: 0;
+  }
+
+  @keyframes grow { to { width: var(--w); } }
+
+  .panel-quote {
+    margin-top: auto;
+    padding-top: 16px;
+    border-top: 1px solid #2a2a2a;
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 13px;
+    color: #888;
+    line-height: 1.55;
+  }
+
+  .panel-quote strong {
+    color: #c8d8ff;
+    font-style: normal;
+  }
+
+  .cover-bottombar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 56px;
+    border-top: 1px solid var(--rule);
+    height: 44px;
+  }
+
+  .meta-row {
+    display: flex;
+    gap: 28px;
+  }
+
+  .meta {
+    font-family: var(--mono);
+    font-size: 9px;
+    color: var(--light);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .meta strong {
+    display: block;
+    color: var(--mid);
+    font-weight: 500;
+    font-size: 10px;
+    margin-bottom: 1px;
+  }
+
+  /* ── CONTENT SLIDE ── */
+  .content-slide { padding: 0; }
+
+  .slide-header {
+    display: flex;
+    align-items: stretch;
+    border-bottom: 1px solid var(--rule);
+    height: 52px;
+  }
+
+  .hdr-num {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--light);
+    padding: 0 22px;
+    display: flex;
+    align-items: center;
+    letter-spacing: 0.08em;
+    border-right: 1px solid var(--rule);
+  }
+
+  .hdr-title {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    padding: 0 28px;
+  }
+
+  .hdr-title h2 {
+    font-family: var(--serif);
+    font-size: 21px;
+    font-weight: 700;
+    color: var(--ink);
+  }
+
+  .hdr-tag {
+    padding: 0 22px;
+    display: flex;
+    align-items: center;
+    border-left: 1px solid var(--rule);
+    font-family: var(--mono);
+    font-size: 9px;
+    color: var(--accent);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  .slide-content {
+    flex: 1;
+    display: grid;
+    grid-template-columns: 1.1fr 1fr;
+  }
+
+  .content-left {
+    padding: 30px 38px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    border-right: 1px solid var(--rule);
+  }
+
+  .lead-statement {
+    font-family: var(--serif);
+    font-size: 18px;
+    font-style: italic;
+    color: var(--ink);
+    line-height: 1.45;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .lead-statement strong {
+    font-style: normal;
+    color: var(--warm);
+  }
+
+  .body-text {
+    font-size: 13px;
+    color: var(--mid);
+    line-height: 1.65;
+    font-weight: 300;
+  }
+
+  .body-text strong { color: var(--ink); font-weight: 500; }
+
+  .source-note {
+    margin-top: auto;
+    padding-top: 12px;
+    border-top: 1px solid var(--rule);
+    font-family: var(--mono);
+    font-size: 9px;
+    color: var(--light);
+    letter-spacing: 0.05em;
+  }
+
+  .content-right {
+    padding: 30px 32px;
+    background: var(--bg);
+    display: flex;
+    flex-direction: column;
+  }
+
+  .aside-head {
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: 0.18em;
+    color: var(--light);
+    text-transform: uppercase;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--rule);
+    margin-bottom: 0;
+  }
+
+  .fact-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 11px 0;
+    border-bottom: 1px solid var(--rule);
+    gap: 10px;
+  }
+
+  .fact-item:last-of-type { border-bottom: none; }
+
+  .fact-text {
+    font-size: 12px;
+    color: var(--mid);
+    line-height: 1.35;
+    font-weight: 300;
+  }
+
+  .verdict {
+    font-family: var(--mono);
+    font-size: 10px;
+    font-weight: 500;
+    flex-shrink: 0;
+  }
+
+  .bad  { color: var(--warm); }
+  .warn { color: #b87a10; }
+
+  .slide-footer {
+    border-top: 1px solid var(--rule);
+    height: 36px;
+    display: flex;
+    align-items: center;
+    padding: 0 32px;
+  }
+
+  .nav {
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: 0.1em;
+    color: var(--light);
+    text-transform: uppercase;
+    padding: 0 14px;
+    border-right: 1px solid var(--rule);
+    height: 100%;
+    display: flex;
+    align-items: center;
+  }
+
+  .nav:first-child { padding-left: 0; }
+  .nav.on { color: var(--accent); }
+  .nav-pg { margin-left: auto; font-family: var(--mono); font-size: 9px; color: var(--light); }
+</style>
+</head>
+<body>
+
+<div class="label">STYLE 05 — VERIFIED / Off-white · DM Sans + Libre Baskerville · Dark panel accent</div>
+
+<!-- COVER -->
+<div class="slide cover">
+  <div class="cover-topbar">
+    <div class="wordmark">Vehicle Identity & Trust Layer</div>
+    <div class="status-pill"><div class="dot"></div>Verification Active</div>
+  </div>
+
+  <div class="cover-body">
+    <div class="cover-text-area">
+      <div class="kicker">Secondary Market Infrastructure</div>
+      <div class="headline-wrap">
+        <h1 class="headline">
+          Trust built<br>
+          <span class="line2">forward.</span>
+        </h1>
+      </div>
+      <p class="tagline">
+        A verification layer for the secondary vehicle market — anchored in the service layer, built one signed event at a time.
+      </p>
+    </div>
+
+    <div class="cover-panel">
+      <div class="panel-header">Verification Coverage Signal</div>
+
+      <div class="sig-item">
+        <div class="sig-row"><span>Continuity</span><span>73%</span></div>
+        <div class="sig-track"><div class="sig-fill" style="background:#5b8fff;--w:73%;--d:0.3s"></div></div>
+      </div>
+      <div class="sig-item">
+        <div class="sig-row"><span>Depth</span><span>61%</span></div>
+        <div class="sig-track"><div class="sig-fill" style="background:#5b8fff;--w:61%;--d:0.5s"></div></div>
+      </div>
+      <div class="sig-item">
+        <div class="sig-row"><span>Integrity</span><span>100%</span></div>
+        <div class="sig-track"><div class="sig-fill" style="background:#4ac880;--w:100%;--d:0.7s"></div></div>
+      </div>
+      <div class="sig-item">
+        <div class="sig-row"><span>Signed events</span><span>14 / 19</span></div>
+        <div class="sig-track"><div class="sig-fill" style="background:#5b8fff;--w:74%;--d:0.9s"></div></div>
+      </div>
+
+      <div class="panel-quote">
+        "Not a report from secondary sources — a <strong>primary record</strong>, built forward."
+      </div>
+    </div>
+  </div>
+
+  <div class="cover-bottombar">
+    <div class="meta-row">
+      <div class="meta"><strong>Stage</strong>Early Overview</div>
+      <div class="meta"><strong>Audience</strong>Co-founders & Partners</div>
+      <div class="meta"><strong>Version</strong>1.0</div>
+    </div>
+    <div class="meta">01 / 12</div>
+  </div>
+</div>
+
+<!-- CONTENT SLIDE -->
+<div class="slide content-slide">
+  <div class="slide-header">
+    <div class="hdr-num">02</div>
+    <div class="hdr-title"><h2>The Problem</h2></div>
+    <div class="hdr-tag">Market Structure</div>
+  </div>
+
+  <div class="slide-content">
+    <div class="content-left">
+      <div class="lead-statement">
+        The secondary vehicle market systematically misprices risk — penalizing <strong>every honest participant</strong>.
+      </div>
+      <p class="body-text">
+        Buyers make high-value decisions using information they cannot verify. Sellers of well-maintained vehicles cannot credibly prove their care. Quality vehicles are undervalued. Poor vehicles are overpriced.
+      </p>
+      <p class="body-text">
+        Akerlof described this in 1970. Fifty years later, it remains the <strong>operating condition</strong> of the secondary vehicle market — globally.
+      </p>
+      <div class="source-note">Akerlof, G. (1970) — "The Market for Lemons: Quality Uncertainty and the Market Mechanism"</div>
+    </div>
+
+    <div class="content-right">
+      <div class="aside-head">Why current solutions fail</div>
+      <div class="fact-item">
+        <div class="fact-text">Service history portability</div>
+        <div class="verdict bad">None</div>
+      </div>
+      <div class="fact-item">
+        <div class="fact-text">Fabrication difficulty</div>
+        <div class="verdict bad">Trivial</div>
+      </div>
+      <div class="fact-item">
+        <div class="fact-text">History reports create new signal</div>
+        <div class="verdict bad">No</div>
+      </div>
+      <div class="fact-item">
+        <div class="fact-text">Inspection coverage</div>
+        <div class="verdict warn">Snapshot only</div>
+      </div>
+      <div class="fact-item">
+        <div class="fact-text">Primary record exists today</div>
+        <div class="verdict bad">No</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="slide-footer">
+    <span class="nav on">Problem</span>
+    <span class="nav">Insight</span>
+    <span class="nav">Architecture</span>
+    <span class="nav">Adoption</span>
+    <span class="nav">Model</span>
+    <span class="nav-pg">02 / 12</span>
+  </div>
+</div>
+
+</body>
+</html>

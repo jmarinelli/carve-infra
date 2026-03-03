@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Style 01 — Industrial Precision</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;700&family=IBM+Plex+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #0a0a0a;
+    --surface: #111111;
+    --border: #2a2a2a;
+    --accent: #c8f542;
+    --accent2: #3a7fff;
+    --text: #e8e8e8;
+    --muted: #666;
+    --mono: 'IBM Plex Mono', monospace;
+    --sans: 'IBM Plex Sans', sans-serif;
+  }
+
+  body {
+    background: #1a1a1a;
+    font-family: var(--sans);
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    padding: 40px;
+    min-height: 100vh;
+    align-items: center;
+  }
+
+  .label {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    color: #888;
+    text-transform: uppercase;
+    text-align: center;
+    margin-bottom: 8px;
+  }
+
+  /* SLIDE */
+  .slide {
+    width: 960px;
+    aspect-ratio: 16/9;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* COVER */
+  .cover {
+    padding: 56px 64px;
+    justify-content: space-between;
+  }
+
+  .cover::before {
+    content: '';
+    position: absolute;
+    top: 0; right: 0;
+    width: 400px;
+    height: 100%;
+    background: repeating-linear-gradient(
+      90deg,
+      transparent,
+      transparent 28px,
+      #ffffff04 28px,
+      #ffffff04 29px
+    );
+    pointer-events: none;
+  }
+
+  .cover-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+
+  .vin-tag {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    color: var(--muted);
+    border: 1px solid var(--border);
+    padding: 6px 12px;
+    text-transform: uppercase;
+  }
+
+  .status-dot {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--accent);
+    letter-spacing: 0.15em;
+  }
+
+  .status-dot::before {
+    content: '';
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--accent);
+    animation: pulse 2s ease-in-out infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+  }
+
+  .cover-main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 32px 0;
+  }
+
+  .cover-eyebrow {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.25em;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin-bottom: 20px;
+  }
+
+  .cover-title {
+    font-family: var(--sans);
+    font-size: 52px;
+    font-weight: 300;
+    color: var(--text);
+    line-height: 1.08;
+    letter-spacing: -0.02em;
+    max-width: 600px;
+  }
+
+  .cover-title strong {
+    font-weight: 600;
+    display: block;
+  }
+
+  .cover-sub {
+    margin-top: 24px;
+    font-size: 14px;
+    color: var(--muted);
+    font-weight: 300;
+    max-width: 480px;
+    line-height: 1.6;
+  }
+
+  .cover-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+
+  .progress-bar {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .progress-label {
+    font-family: var(--mono);
+    font-size: 9px;
+    color: var(--muted);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+  }
+
+  .progress-track {
+    width: 200px;
+    height: 2px;
+    background: var(--border);
+    position: relative;
+  }
+
+  .progress-fill {
+    position: absolute;
+    left: 0; top: 0;
+    height: 100%;
+    background: var(--accent);
+    width: 0%;
+    animation: fillProgress 1.5s ease forwards 0.5s;
+  }
+
+  @keyframes fillProgress {
+    to { width: 73%; }
+  }
+
+  .progress-value {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--accent);
+    margin-top: 4px;
+  }
+
+  .cover-meta {
+    text-align: right;
+  }
+
+  .cover-meta span {
+    display: block;
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--muted);
+    letter-spacing: 0.1em;
+  }
+
+  /* DIVIDER LINE */
+  .divider {
+    position: absolute;
+    left: 64px; right: 64px;
+    height: 1px;
+    background: var(--border);
+  }
+
+  /* CONTENT SLIDE */
+  .content-slide {
+    padding: 0;
+  }
+
+  .slide-header {
+    display: flex;
+    align-items: stretch;
+    border-bottom: 1px solid var(--border);
+    height: 64px;
+  }
+
+  .slide-number {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--muted);
+    padding: 0 24px;
+    display: flex;
+    align-items: center;
+    border-right: 1px solid var(--border);
+    letter-spacing: 0.1em;
+  }
+
+  .slide-title-bar {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    padding: 0 32px;
+  }
+
+  .slide-title-bar h2 {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+
+  .slide-tag {
+    margin-left: auto;
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--accent);
+    background: #c8f54210;
+    border: 1px solid #c8f54230;
+    padding: 4px 10px;
+    letter-spacing: 0.1em;
+  }
+
+  .slide-body {
+    flex: 1;
+    display: grid;
+    grid-template-columns: 1fr 1px 1fr;
+    gap: 0;
+  }
+
+  .col-divider {
+    background: var(--border);
+  }
+
+  .col {
+    padding: 36px 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .col-label {
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    color: var(--muted);
+    text-transform: uppercase;
+  }
+
+  .insight-block {
+    border-left: 2px solid var(--accent);
+    padding-left: 16px;
+  }
+
+  .insight-block p {
+    font-size: 14px;
+    line-height: 1.65;
+    color: var(--text);
+    font-weight: 300;
+  }
+
+  .insight-block strong {
+    color: var(--accent);
+    font-weight: 500;
+  }
+
+  .metric-row {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .metric {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .metric:last-child { border-bottom: none; }
+
+  .metric-name {
+    font-size: 12px;
+    color: var(--muted);
+    font-family: var(--mono);
+    letter-spacing: 0.05em;
+  }
+
+  .metric-val {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--text);
+  }
+
+  .metric-bar-wrap {
+    width: 80px;
+    height: 2px;
+    background: var(--border);
+    margin-left: 16px;
+    position: relative;
+    flex-shrink: 0;
+  }
+
+  .metric-bar {
+    position: absolute;
+    left: 0; top: 0;
+    height: 100%;
+    background: var(--accent2);
+  }
+
+  .slide-footer {
+    border-top: 1px solid var(--border);
+    height: 36px;
+    display: flex;
+    align-items: center;
+    padding: 0 32px;
+    gap: 24px;
+  }
+
+  .footer-item {
+    font-family: var(--mono);
+    font-size: 9px;
+    color: var(--muted);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+  }
+
+  .footer-item.active {
+    color: var(--accent);
+  }
+
+</style>
+</head>
+<body>
+
+<div class="label">STYLE 01 — INDUSTRIAL PRECISION / Dark · Monospaced · Structured</div>
+
+<!-- COVER SLIDE -->
+<div class="slide cover">
+  <div class="cover-top">
+    <div class="vin-tag">VIN — TRUST LAYER v1.0</div>
+    <div class="status-dot">VERIFICATION ACTIVE</div>
+  </div>
+
+  <div class="cover-main">
+    <div class="cover-eyebrow">Vehicle Identity Infrastructure</div>
+    <h1 class="cover-title">
+      Trust built<br>
+      <strong>forward.</strong>
+    </h1>
+    <p class="cover-sub">
+      A verification layer for the secondary vehicle market — anchored in the service layer, built one signed event at a time.
+    </p>
+  </div>
+
+  <div class="cover-bottom">
+    <div class="progress-bar">
+      <div class="progress-label">Verification Coverage</div>
+      <div class="progress-track"><div class="progress-fill"></div></div>
+      <div class="progress-value">73% — LEDGER SIGNED</div>
+    </div>
+    <div class="cover-meta">
+      <span>Early Stage Overview</span>
+      <span style="margin-top:4px">For co-founders & partners</span>
+    </div>
+  </div>
+</div>
+
+<!-- CONTENT SLIDE -->
+<div class="slide content-slide">
+  <div class="slide-header">
+    <div class="slide-number">02</div>
+    <div class="slide-title-bar">
+      <h2>The Problem</h2>
+      <div class="slide-tag">MARKET STRUCTURE</div>
+    </div>
+  </div>
+
+  <div class="slide-body">
+    <div class="col">
+      <div class="col-label">The structural failure</div>
+      <div class="insight-block">
+        <p>
+          The secondary vehicle market is one of the largest transaction categories globally — and one of the <strong>least trusted</strong>.
+        </p>
+      </div>
+      <div class="insight-block">
+        <p>
+          Quality vehicles are <strong>undervalued</strong>. Poor vehicles are <strong>overpriced</strong>. Honest participants are <strong>penalized</strong>.
+        </p>
+      </div>
+      <div class="insight-block" style="border-color: var(--muted)">
+        <p style="color: var(--muted); font-size: 13px;">
+          Akerlof's "market for lemons" — identified in 1970. Fifty years later, it remains the operating condition.
+        </p>
+      </div>
+    </div>
+
+    <div class="col-divider"></div>
+
+    <div class="col">
+      <div class="col-label">Why it persists</div>
+      <div class="metric-row">
+        <div class="metric">
+          <span class="metric-name">Service history</span>
+          <span class="metric-val">Fragmented</span>
+          <div class="metric-bar-wrap"><div class="metric-bar" style="width: 90%; background: #ff4444;"></div></div>
+        </div>
+        <div class="metric">
+          <span class="metric-name">Portability</span>
+          <span class="metric-val">None</span>
+          <div class="metric-bar-wrap"><div class="metric-bar" style="width: 5%; background: #ff4444;"></div></div>
+        </div>
+        <div class="metric">
+          <span class="metric-name">Fabrication difficulty</span>
+          <span class="metric-val">Trivial</span>
+          <div class="metric-bar-wrap"><div class="metric-bar" style="width: 15%; background: #ff4444;"></div></div>
+        </div>
+        <div class="metric">
+          <span class="metric-name">Existing solutions</span>
+          <span class="metric-val">Retrospective</span>
+          <div class="metric-bar-wrap"><div class="metric-bar" style="width: 30%; background: #888;"></div></div>
+        </div>
+        <div class="metric">
+          <span class="metric-name">New signal created</span>
+          <span class="metric-val" style="color: #ff4444;">None</span>
+          <div class="metric-bar-wrap"><div class="metric-bar" style="width: 0%; background: #ff4444;"></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="slide-footer">
+    <span class="footer-item active">Problem</span>
+    <span class="footer-item">Insight</span>
+    <span class="footer-item">Architecture</span>
+    <span class="footer-item">Adoption</span>
+    <span class="footer-item">Business Model</span>
+    <span class="footer-item">Validation</span>
+  </div>
+</div>
+
+</body>
+</html>

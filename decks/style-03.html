@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Style 03 — Clean Signal</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Instrument+Serif:ital@0;1&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #f8f8f6;
+    --paper: #ffffff;
+    --ink: #111111;
+    --mid: #555550;
+    --light: #aaaaaa;
+    --rule: #e5e5e0;
+    --accent: #0057ff;
+    --accent-warm: #ff4c00;
+    --sans: 'Syne', sans-serif;
+    --serif: 'Instrument Serif', Georgia, serif;
+    --mono: 'Geist Mono', monospace;
+  }
+
+  body {
+    background: #ececea;
+    font-family: var(--sans);
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    padding: 40px;
+    min-height: 100vh;
+    align-items: center;
+  }
+
+  .label {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    color: #888;
+    text-transform: uppercase;
+    text-align: center;
+    margin-bottom: 8px;
+  }
+
+  .slide {
+    width: 960px;
+    aspect-ratio: 16/9;
+    background: var(--paper);
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 2px 24px rgba(0,0,0,0.08);
+  }
+
+  /* ── COVER ── */
+  .cover {
+    padding: 0;
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+  }
+
+  .cover-top-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 24px 56px;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .cover-logo-type {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    color: var(--light);
+    text-transform: uppercase;
+  }
+
+  .cover-badge {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--accent);
+    letter-spacing: 0.08em;
+    background: #0057ff08;
+    border: 1px solid #0057ff20;
+    padding: 6px 14px;
+  }
+
+  .cover-badge::before {
+    content: '';
+    width: 6px; height: 6px;
+    background: var(--accent);
+    border-radius: 50%;
+  }
+
+  .cover-main {
+    padding: 40px 56px;
+    display: grid;
+    grid-template-columns: 1fr 280px;
+    gap: 56px;
+    align-items: center;
+  }
+
+  .cover-text h1 {
+    font-family: var(--sans);
+    font-size: 64px;
+    font-weight: 800;
+    color: var(--ink);
+    line-height: 0.95;
+    letter-spacing: -0.03em;
+  }
+
+  .cover-text h1 span {
+    color: var(--accent);
+  }
+
+  .cover-text h1 em {
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 400;
+    font-size: 58px;
+    color: var(--mid);
+    display: block;
+  }
+
+  .cover-text p {
+    margin-top: 20px;
+    font-size: 14px;
+    color: var(--mid);
+    line-height: 1.6;
+    font-weight: 400;
+    max-width: 400px;
+  }
+
+  .cover-signal {
+    border: 1px solid var(--rule);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .signal-title {
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    color: var(--light);
+    text-transform: uppercase;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .signal-item {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .signal-label {
+    display: flex;
+    justify-content: space-between;
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: 0.08em;
+    color: var(--mid);
+    text-transform: uppercase;
+  }
+
+  .signal-label span:last-child {
+    color: var(--ink);
+    font-weight: 500;
+  }
+
+  .signal-track {
+    height: 3px;
+    background: var(--rule);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .signal-fill {
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    animation: grow 1.2s ease forwards;
+    animation-delay: var(--delay, 0s);
+    width: 0;
+  }
+
+  @keyframes grow {
+    to { width: var(--w); }
+  }
+
+  .cover-bottom {
+    padding: 20px 56px;
+    border-top: 1px solid var(--rule);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .cover-meta {
+    display: flex;
+    gap: 32px;
+  }
+
+  .meta-item {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--light);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .meta-item strong {
+    display: block;
+    color: var(--ink);
+    font-weight: 500;
+    font-size: 11px;
+    margin-bottom: 2px;
+  }
+
+  .slide-num-cover {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--light);
+    letter-spacing: 0.1em;
+  }
+
+  /* ── CONTENT ── */
+  .content-slide {
+    padding: 0;
+  }
+
+  .slide-top-bar {
+    display: flex;
+    align-items: stretch;
+    border-bottom: 1px solid var(--rule);
+    height: 56px;
+  }
+
+  .top-num {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--light);
+    padding: 0 24px;
+    display: flex;
+    align-items: center;
+    letter-spacing: 0.1em;
+    border-right: 1px solid var(--rule);
+  }
+
+  .top-title {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    padding: 0 32px;
+  }
+
+  .top-title h2 {
+    font-family: var(--sans);
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--ink);
+    letter-spacing: -0.01em;
+  }
+
+  .top-category {
+    padding: 0 24px;
+    display: flex;
+    align-items: center;
+    border-left: 1px solid var(--rule);
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--accent);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .slide-content {
+    flex: 1;
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 0;
+  }
+
+  .content-main {
+    padding: 36px 40px;
+    border-right: 1px solid var(--rule);
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .big-statement {
+    font-family: var(--serif);
+    font-size: 22px;
+    font-style: italic;
+    color: var(--ink);
+    line-height: 1.4;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .big-statement strong {
+    font-style: normal;
+    font-family: var(--sans);
+    font-weight: 700;
+    color: var(--accent-warm);
+  }
+
+  .body-text {
+    font-size: 13px;
+    line-height: 1.65;
+    color: var(--mid);
+    font-weight: 400;
+  }
+
+  .body-text strong {
+    color: var(--ink);
+    font-weight: 600;
+  }
+
+  .footnote {
+    margin-top: auto;
+    padding-top: 16px;
+    border-top: 1px solid var(--rule);
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--light);
+    letter-spacing: 0.06em;
+  }
+
+  .content-aside {
+    padding: 36px 36px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .aside-header {
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    color: var(--light);
+    text-transform: uppercase;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .fact-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--rule);
+    gap: 16px;
+  }
+
+  .fact-row:last-of-type { border-bottom: none; }
+
+  .fact-label {
+    font-size: 12px;
+    color: var(--mid);
+    line-height: 1.4;
+    flex: 1;
+  }
+
+  .fact-verdict {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.06em;
+    font-weight: 500;
+    flex-shrink: 0;
+  }
+
+  .fact-verdict.bad { color: var(--accent-warm); }
+  .fact-verdict.warn { color: #e6a817; }
+  .fact-verdict.good { color: #16a34a; }
+
+  .slide-bottom-bar {
+    border-top: 1px solid var(--rule);
+    height: 36px;
+    display: flex;
+    align-items: center;
+    padding: 0 32px;
+    gap: 0;
+  }
+
+  .nav-item {
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: 0.12em;
+    color: var(--light);
+    text-transform: uppercase;
+    padding: 0 16px;
+    border-right: 1px solid var(--rule);
+    height: 100%;
+    display: flex;
+    align-items: center;
+  }
+
+  .nav-item:first-child { padding-left: 0; }
+  .nav-item.active { color: var(--accent); }
+
+  .nav-page { margin-left: auto; font-family: var(--mono); font-size: 9px; color: var(--light); letter-spacing: 0.1em; }
+</style>
+</head>
+<body>
+
+<div class="label">STYLE 03 — CLEAN SIGNAL / Light · Sharp · Data-Forward</div>
+
+<!-- COVER -->
+<div class="slide cover">
+  <div class="cover-top-bar">
+    <div class="cover-logo-type">Vehicle Identity & Trust Layer</div>
+    <div class="cover-badge">Verification Active</div>
+  </div>
+
+  <div class="cover-main">
+    <div class="cover-text">
+      <h1>
+        Trust<br>
+        <span>built</span><br>
+        <em>forward.</em>
+      </h1>
+      <p>A verification layer for the secondary vehicle market — anchored in the service layer, built one signed event at a time.</p>
+    </div>
+
+    <div class="cover-signal">
+      <div class="signal-title">Verification Coverage Signal</div>
+
+      <div class="signal-item">
+        <div class="signal-label"><span>Continuity</span><span>73%</span></div>
+        <div class="signal-track">
+          <div class="signal-fill" style="background: var(--accent); --w: 73%; --delay: 0.3s;"></div>
+        </div>
+      </div>
+
+      <div class="signal-item">
+        <div class="signal-label"><span>Depth</span><span>61%</span></div>
+        <div class="signal-track">
+          <div class="signal-fill" style="background: var(--accent); --w: 61%; --delay: 0.5s;"></div>
+        </div>
+      </div>
+
+      <div class="signal-item">
+        <div class="signal-label"><span>Integrity</span><span>100%</span></div>
+        <div class="signal-track">
+          <div class="signal-fill" style="background: #16a34a; --w: 100%; --delay: 0.7s;"></div>
+        </div>
+      </div>
+
+      <div class="signal-item">
+        <div class="signal-label"><span>Node-signed events</span><span>14 / 19</span></div>
+        <div class="signal-track">
+          <div class="signal-fill" style="background: var(--accent); --w: 74%; --delay: 0.9s;"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="cover-bottom">
+    <div class="cover-meta">
+      <div class="meta-item"><strong>Early Stage</strong>Overview</div>
+      <div class="meta-item"><strong>Audience</strong>Co-founders & Partners</div>
+      <div class="meta-item"><strong>Version</strong>1.0</div>
+    </div>
+    <div class="slide-num-cover">01 / 12</div>
+  </div>
+</div>
+
+<!-- CONTENT SLIDE -->
+<div class="slide content-slide">
+  <div class="slide-top-bar">
+    <div class="top-num">02</div>
+    <div class="top-title"><h2>The Problem</h2></div>
+    <div class="top-category">Market Structure</div>
+  </div>
+
+  <div class="slide-content">
+    <div class="content-main">
+      <div class="big-statement">
+        The secondary vehicle market systematically misprices risk — penalizing <strong>every honest participant</strong>.
+      </div>
+
+      <p class="body-text">
+        Buyers make high-value decisions using information they cannot verify. Sellers of well-maintained vehicles cannot credibly prove their care. The result is a classic <strong>information asymmetry</strong>: quality vehicles undervalued, poor vehicles overpriced.
+      </p>
+
+      <p class="body-text">
+        Akerlof described this in 1970. Fifty years later, it remains the operating condition of the secondary vehicle market — globally.
+      </p>
+
+      <div class="footnote">
+        Akerlof, G. (1970) — "The Market for Lemons: Quality Uncertainty and the Market Mechanism"
+      </div>
+    </div>
+
+    <div class="content-aside">
+      <div class="aside-header">Why current solutions fail</div>
+
+      <div class="fact-row">
+        <div class="fact-label">Service history portability</div>
+        <div class="fact-verdict bad">None</div>
+      </div>
+      <div class="fact-row">
+        <div class="fact-label">Fabrication difficulty</div>
+        <div class="fact-verdict bad">Trivial</div>
+      </div>
+      <div class="fact-row">
+        <div class="fact-label">History reports create new signal</div>
+        <div class="fact-verdict bad">No</div>
+      </div>
+      <div class="fact-row">
+        <div class="fact-label">Inspection coverage</div>
+        <div class="fact-verdict warn">Snapshot</div>
+      </div>
+      <div class="fact-row">
+        <div class="fact-label">Primary record exists</div>
+        <div class="fact-verdict bad">No</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="slide-bottom-bar">
+    <span class="nav-item active">Problem</span>
+    <span class="nav-item">Insight</span>
+    <span class="nav-item">Architecture</span>
+    <span class="nav-item">Adoption</span>
+    <span class="nav-item">Model</span>
+    <span class="nav-page">02 / 12</span>
+  </div>
+</div>
+
+</body>
+</html>

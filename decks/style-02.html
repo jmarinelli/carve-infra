@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Style 02 — Editorial Authority</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;900&family=Source+Serif+4:wght@300;400;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #f5f0e8;
+    --paper: #faf7f2;
+    --ink: #1a1612;
+    --ink-mid: #4a4540;
+    --ink-light: #9a9590;
+    --rule: #d8d0c4;
+    --accent: #c44b1e;
+    --accent2: #2c5f8a;
+    --serif: 'Playfair Display', Georgia, serif;
+    --body: 'Source Serif 4', Georgia, serif;
+    --mono: 'DM Mono', monospace;
+  }
+
+  body {
+    background: #e8e2d8;
+    font-family: var(--body);
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    padding: 40px;
+    min-height: 100vh;
+    align-items: center;
+  }
+
+  .label {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    color: #888;
+    text-transform: uppercase;
+    text-align: center;
+    margin-bottom: 8px;
+  }
+
+  .slide {
+    width: 960px;
+    aspect-ratio: 16/9;
+    background: var(--paper);
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 4px 40px rgba(0,0,0,0.15);
+  }
+
+  /* ── COVER ── */
+  .cover {
+    display: grid;
+    grid-template-columns: 1fr 1px 380px;
+  }
+
+  .cover-left {
+    padding: 52px 56px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background: var(--ink);
+  }
+
+  .cover-left::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.02'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .cover-left > * { position: relative; z-index: 1; }
+
+  .cover-kicker {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    color: var(--accent);
+    text-transform: uppercase;
+  }
+
+  .cover-kicker::before {
+    content: '';
+    display: block;
+    width: 32px;
+    height: 1px;
+    background: var(--accent);
+  }
+
+  .cover-headline {
+    font-family: var(--serif);
+    font-size: 58px;
+    font-weight: 700;
+    color: #f5f0e8;
+    line-height: 1.0;
+    letter-spacing: -0.02em;
+  }
+
+  .cover-headline em {
+    display: block;
+    font-style: italic;
+    font-weight: 400;
+    color: var(--accent);
+    font-size: 50px;
+  }
+
+  .cover-deck {
+    font-size: 13px;
+    color: #9a9590;
+    line-height: 1.65;
+    font-weight: 300;
+    max-width: 320px;
+    border-top: 1px solid #333;
+    padding-top: 16px;
+  }
+
+  .col-divider-v {
+    background: var(--rule);
+  }
+
+  .cover-right {
+    padding: 52px 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background: var(--paper);
+  }
+
+  .cover-right-top {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .cover-right-top span {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--ink-light);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    border-bottom: 1px solid var(--rule);
+    padding-bottom: 8px;
+  }
+
+  .cover-pull-quote {
+    font-family: var(--serif);
+    font-size: 20px;
+    font-weight: 400;
+    font-style: italic;
+    color: var(--ink-mid);
+    line-height: 1.5;
+    padding: 20px 0;
+    border-top: 2px solid var(--ink);
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .cover-pull-quote strong {
+    font-style: normal;
+    font-weight: 700;
+    color: var(--ink);
+  }
+
+  .byline {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--ink-light);
+    letter-spacing: 0.08em;
+  }
+
+  /* ── CONTENT SLIDE ── */
+  .content-slide {
+    padding: 0;
+  }
+
+  .slide-masthead {
+    display: flex;
+    align-items: stretch;
+    border-bottom: 2px solid var(--ink);
+    height: 52px;
+  }
+
+  .masthead-section {
+    padding: 0 24px;
+    display: flex;
+    align-items: center;
+    border-right: 1px solid var(--rule);
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    color: var(--ink-light);
+    text-transform: uppercase;
+  }
+
+  .masthead-title {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    padding: 0 32px;
+  }
+
+  .masthead-title h2 {
+    font-family: var(--serif);
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--ink);
+    letter-spacing: -0.01em;
+  }
+
+  .masthead-tag {
+    margin-left: auto;
+    font-family: var(--mono);
+    font-size: 9px;
+    color: var(--accent);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    border-left: 1px solid var(--rule);
+    padding: 0 24px;
+    display: flex;
+    align-items: center;
+  }
+
+  .slide-columns {
+    flex: 1;
+    display: grid;
+    grid-template-columns: 1fr 1px 1fr 1px 1fr;
+  }
+
+  .col-rule {
+    background: var(--rule);
+  }
+
+  .col {
+    padding: 28px 28px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .col-header {
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    color: var(--accent);
+    text-transform: uppercase;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .col p {
+    font-size: 13px;
+    line-height: 1.6;
+    color: var(--ink-mid);
+    font-weight: 300;
+  }
+
+  .col p strong {
+    color: var(--ink);
+    font-weight: 600;
+  }
+
+  .pull {
+    font-family: var(--serif);
+    font-size: 16px;
+    font-style: italic;
+    color: var(--ink);
+    line-height: 1.45;
+    border-left: 3px solid var(--accent);
+    padding-left: 14px;
+    margin-top: 4px;
+  }
+
+  .stat-block {
+    background: var(--bg);
+    padding: 14px 16px;
+    border: 1px solid var(--rule);
+    margin-top: auto;
+  }
+
+  .stat-num {
+    font-family: var(--serif);
+    font-size: 36px;
+    font-weight: 900;
+    color: var(--ink);
+    line-height: 1;
+    letter-spacing: -0.02em;
+  }
+
+  .stat-label {
+    font-family: var(--mono);
+    font-size: 9px;
+    color: var(--ink-light);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-top: 4px;
+  }
+
+  .slide-footer {
+    border-top: 1px solid var(--rule);
+    height: 36px;
+    display: flex;
+    align-items: center;
+    padding: 0 32px;
+    gap: 0;
+  }
+
+  .footer-item {
+    font-family: var(--mono);
+    font-size: 9px;
+    color: var(--ink-light);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 0 16px;
+    border-right: 1px solid var(--rule);
+    height: 100%;
+    display: flex;
+    align-items: center;
+  }
+
+  .footer-item:first-child { padding-left: 0; }
+  .footer-item.active { color: var(--accent); }
+
+  .footer-page {
+    margin-left: auto;
+    font-family: var(--mono);
+    font-size: 9px;
+    color: var(--ink-light);
+    letter-spacing: 0.1em;
+  }
+</style>
+</head>
+<body>
+
+<div class="label">STYLE 02 — EDITORIAL AUTHORITY / Warm · Serif · Print-Inspired</div>
+
+<!-- COVER -->
+<div class="slide cover">
+  <div class="cover-left">
+    <div class="cover-kicker">Vehicle Identity Infrastructure</div>
+    <h1 class="cover-headline">
+      Trust<br>built<br><em>forward.</em>
+    </h1>
+    <p class="cover-deck">
+      A verification layer for the secondary vehicle market — anchored in the service layer, built one signed event at a time.
+    </p>
+  </div>
+
+  <div class="col-divider-v"></div>
+
+  <div class="cover-right">
+    <div class="cover-right-top">
+      <span>Early Stage Overview</span>
+      <span>For Co-founders & Partners</span>
+      <span>Version 1.0</span>
+    </div>
+
+    <p class="cover-pull-quote">
+      "The market doesn't need better reports.<br>It needs a <strong>primary record</strong> — built forward, event by event."
+    </p>
+
+    <div class="byline">VEHICLE IDENTITY & SECONDARY MARKET TRUST LAYER</div>
+  </div>
+</div>
+
+<!-- CONTENT SLIDE -->
+<div class="slide content-slide">
+  <div class="slide-masthead">
+    <div class="masthead-section">02</div>
+    <div class="masthead-title">
+      <h2>The Problem</h2>
+    </div>
+    <div class="masthead-tag">Market Structure</div>
+  </div>
+
+  <div class="slide-columns">
+    <div class="col">
+      <div class="col-header">The condition</div>
+      <p>The secondary vehicle market is one of the largest transaction categories globally — and one of the <strong>least trusted</strong>.</p>
+      <div class="pull">
+        "A market that systematically misprices risk."
+      </div>
+      <p>Buyers make high-value decisions using information they cannot verify. Quality vehicles are undervalued. Poor vehicles are overpriced.</p>
+    </div>
+
+    <div class="col-rule"></div>
+
+    <div class="col">
+      <div class="col-header">Why it persists</div>
+      <p>Service history — the most direct evidence of vehicle condition — is <strong>fragmented, non-portable, and trivially easy to fabricate</strong>.</p>
+      <p>Existing solutions are retrospective snapshots. They aggregate what was already recorded elsewhere.</p>
+      <div class="stat-block">
+        <div class="stat-num">50 yrs</div>
+        <div class="stat-label">Akerlof's "lemons" problem — still unresolved</div>
+      </div>
+    </div>
+
+    <div class="col-rule"></div>
+
+    <div class="col">
+      <div class="col-header">The gap</div>
+      <p>Existing solutions do not create new signal. They do not address the structural asymmetry — they document it.</p>
+      <p>The raw material for verification is produced <strong>continuously</strong> — every oil change, every repair, every measurement. It is simply <strong>unstructured and unverifiable</strong>.</p>
+      <p style="color: var(--ink-light); font-size: 12px; font-style: italic;">The challenge is infrastructure, not behavioral change.</p>
+    </div>
+  </div>
+
+  <div class="slide-footer">
+    <span class="footer-item active">Problem</span>
+    <span class="footer-item">Insight</span>
+    <span class="footer-item">Architecture</span>
+    <span class="footer-item">Adoption</span>
+    <span class="footer-item">Model</span>
+    <span class="footer-page">02 / 12</span>
+  </div>
+</div>
+
+</body>
+</html>

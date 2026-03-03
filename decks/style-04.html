@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Style 04 — Grounded Clarity</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,600;0,9..144,700;1,9..144,300;1,9..144,400&family=Epilogue:wght@400;500;600;700&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #f7f6f3;
+    --paper: #ffffff;
+    --ink: #181714;
+    --mid: #5a5751;
+    --light: #aaa9a4;
+    --rule: #e6e4df;
+    --accent: #1847d4;
+    --accent-warm: #d44c18;
+    --green: #1a7a4a;
+    --sans: 'Epilogue', sans-serif;
+    --display: 'Fraunces', Georgia, serif;
+    --mono: 'Roboto Mono', monospace;
+  }
+
+  body {
+    background: #e9e7e2;
+    font-family: var(--sans);
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    padding: 40px;
+    min-height: 100vh;
+    align-items: center;
+  }
+
+  .label {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    color: #888;
+    text-transform: uppercase;
+    text-align: center;
+    margin-bottom: 8px;
+  }
+
+  .slide {
+    width: 960px;
+    aspect-ratio: 16/9;
+    background: var(--paper);
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 2px 24px rgba(0,0,0,0.09);
+  }
+
+  /* ── COVER ── */
+  .cover {
+    display: grid;
+    grid-template-rows: 56px 1fr 48px;
+  }
+
+  .cover-top-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 56px;
+    border-bottom: 1px solid var(--rule);
+    flex-shrink: 0;
+  }
+
+  .cover-logo-type {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    color: var(--light);
+    text-transform: uppercase;
+  }
+
+  .cover-badge {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--accent);
+    letter-spacing: 0.08em;
+    background: #1847d408;
+    border: 1px solid #1847d420;
+    padding: 5px 14px;
+  }
+
+  .cover-badge::before {
+    content: '';
+    width: 6px; height: 6px;
+    background: var(--accent);
+    border-radius: 50%;
+    animation: blink 2s ease-in-out infinite;
+  }
+
+  @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.25} }
+
+  .cover-main {
+    display: grid;
+    grid-template-columns: 1fr 300px;
+    gap: 0;
+    flex: 1;
+  }
+
+  .cover-left {
+    padding: 44px 56px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border-right: 1px solid var(--rule);
+  }
+
+  .cover-kicker {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    color: var(--accent);
+    text-transform: uppercase;
+  }
+
+  .cover-title {
+    flex: 1;
+    display: flex;
+    align-items: center;
+  }
+
+  .cover-title h1 {
+    font-family: var(--display);
+    font-size: 68px;
+    font-weight: 300;
+    color: var(--ink);
+    line-height: 0.97;
+    letter-spacing: -0.02em;
+  }
+
+  .cover-title h1 em {
+    font-style: italic;
+    color: var(--accent);
+  }
+
+  .cover-title h1 strong {
+    font-weight: 600;
+  }
+
+  .cover-subtitle {
+    font-size: 13px;
+    color: var(--mid);
+    line-height: 1.6;
+    font-weight: 400;
+    max-width: 380px;
+    padding-top: 16px;
+    border-top: 1px solid var(--rule);
+  }
+
+  .cover-right {
+    padding: 32px 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    background: var(--bg);
+  }
+
+  .signal-header {
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: 0.18em;
+    color: var(--light);
+    text-transform: uppercase;
+    padding-bottom: 14px;
+    border-bottom: 1px solid var(--rule);
+    margin-bottom: 16px;
+  }
+
+  .signal-item {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    margin-bottom: 14px;
+  }
+
+  .signal-row {
+    display: flex;
+    justify-content: space-between;
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--mid);
+    letter-spacing: 0.05em;
+  }
+
+  .signal-row span:last-child { color: var(--ink); font-weight: 500; }
+
+  .signal-track {
+    height: 3px;
+    background: var(--rule);
+    position: relative;
+  }
+
+  .signal-fill {
+    position: absolute; left:0; top:0; bottom:0;
+    animation: grow 1.1s ease forwards;
+    animation-delay: var(--delay, 0s);
+    width: 0;
+  }
+
+  @keyframes grow { to { width: var(--w); } }
+
+  .cover-note {
+    margin-top: auto;
+    font-family: var(--display);
+    font-style: italic;
+    font-weight: 300;
+    font-size: 14px;
+    color: var(--mid);
+    line-height: 1.5;
+    padding-top: 16px;
+    border-top: 1px solid var(--rule);
+  }
+
+  .cover-bottom-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 56px;
+    border-top: 1px solid var(--rule);
+    height: 48px;
+    flex-shrink: 0;
+  }
+
+  .cover-meta {
+    display: flex;
+    gap: 32px;
+  }
+
+  .meta-item {
+    font-family: var(--mono);
+    font-size: 9px;
+    color: var(--light);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .meta-item strong {
+    display: block;
+    color: var(--ink);
+    font-weight: 600;
+    font-size: 10px;
+    margin-bottom: 1px;
+  }
+
+  /* ── CONTENT SLIDE ── */
+  .content-slide { padding: 0; }
+
+  .slide-top {
+    display: flex;
+    align-items: stretch;
+    border-bottom: 1px solid var(--rule);
+    height: 52px;
+  }
+
+  .top-num {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--light);
+    padding: 0 24px;
+    display: flex;
+    align-items: center;
+    letter-spacing: 0.1em;
+    border-right: 1px solid var(--rule);
+  }
+
+  .top-title {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    padding: 0 28px;
+  }
+
+  .top-title h2 {
+    font-family: var(--display);
+    font-size: 22px;
+    font-weight: 600;
+    color: var(--ink);
+    letter-spacing: -0.01em;
+  }
+
+  .top-tag {
+    padding: 0 24px;
+    display: flex;
+    align-items: center;
+    border-left: 1px solid var(--rule);
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--accent);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .slide-body {
+    flex: 1;
+    display: grid;
+    grid-template-columns: 1.1fr 1fr;
+  }
+
+  .main-col {
+    padding: 32px 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    border-right: 1px solid var(--rule);
+  }
+
+  .lead {
+    font-family: var(--display);
+    font-size: 19px;
+    font-style: italic;
+    font-weight: 300;
+    color: var(--ink);
+    line-height: 1.45;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .lead strong {
+    font-weight: 600;
+    font-style: normal;
+    color: var(--accent-warm);
+  }
+
+  .body-p {
+    font-size: 13px;
+    color: var(--mid);
+    line-height: 1.65;
+    font-weight: 400;
+  }
+
+  .body-p strong { color: var(--ink); font-weight: 600; }
+
+  .fn {
+    margin-top: auto;
+    padding-top: 12px;
+    border-top: 1px solid var(--rule);
+    font-family: var(--mono);
+    font-size: 9px;
+    color: var(--light);
+    letter-spacing: 0.06em;
+  }
+
+  .aside-col {
+    padding: 32px 36px;
+    background: var(--bg);
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .aside-header {
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: 0.18em;
+    color: var(--light);
+    text-transform: uppercase;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--rule);
+    margin-bottom: 4px;
+  }
+
+  .fact-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 11px 0;
+    border-bottom: 1px solid var(--rule);
+    gap: 12px;
+  }
+
+  .fact-row:last-of-type { border-bottom: none; }
+
+  .fact-label {
+    font-size: 12px;
+    color: var(--mid);
+    line-height: 1.3;
+  }
+
+  .fact-verdict {
+    font-family: var(--mono);
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    flex-shrink: 0;
+  }
+
+  .bad { color: var(--accent-warm); }
+  .warn { color: #c48a12; }
+  .good { color: var(--green); }
+
+  .slide-footer {
+    border-top: 1px solid var(--rule);
+    height: 36px;
+    display: flex;
+    align-items: center;
+    padding: 0 32px;
+  }
+
+  .nav-item {
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: 0.1em;
+    color: var(--light);
+    text-transform: uppercase;
+    padding: 0 14px;
+    border-right: 1px solid var(--rule);
+    height: 100%;
+    display: flex;
+    align-items: center;
+  }
+
+  .nav-item:first-child { padding-left: 0; }
+  .nav-item.active { color: var(--accent); }
+  .nav-page { margin-left: auto; font-family: var(--mono); font-size: 9px; color: var(--light); }
+</style>
+</head>
+<body>
+
+<div class="label">STYLE 04 — GROUNDED CLARITY / Off-white · Fraunces + Epilogue · Structured warmth</div>
+
+<!-- COVER -->
+<div class="slide cover">
+  <div class="cover-top-bar">
+    <div class="cover-logo-type">Vehicle Identity & Trust Layer</div>
+    <div class="cover-badge">Verification Active</div>
+  </div>
+
+  <div class="cover-main">
+    <div class="cover-left">
+      <div class="cover-kicker">Secondary Market Infrastructure</div>
+      <div class="cover-title">
+        <h1>Trust<br>built<br><em>forward<strong>.</strong></em></h1>
+      </div>
+      <p class="cover-subtitle">
+        A verification layer for the secondary vehicle market — anchored in the service layer, built one signed event at a time.
+      </p>
+    </div>
+
+    <div class="cover-right">
+      <div class="signal-header">Verification Coverage Signal</div>
+
+      <div class="signal-item">
+        <div class="signal-row"><span>Continuity</span><span>73%</span></div>
+        <div class="signal-track"><div class="signal-fill" style="background:var(--accent);--w:73%;--delay:0.3s"></div></div>
+      </div>
+      <div class="signal-item">
+        <div class="signal-row"><span>Depth</span><span>61%</span></div>
+        <div class="signal-track"><div class="signal-fill" style="background:var(--accent);--w:61%;--delay:0.5s"></div></div>
+      </div>
+      <div class="signal-item">
+        <div class="signal-row"><span>Integrity</span><span>100%</span></div>
+        <div class="signal-track"><div class="signal-fill" style="background:var(--green);--w:100%;--delay:0.7s"></div></div>
+      </div>
+      <div class="signal-item">
+        <div class="signal-row"><span>Node-signed events</span><span>14 / 19</span></div>
+        <div class="signal-track"><div class="signal-fill" style="background:var(--accent);--w:74%;--delay:0.9s"></div></div>
+      </div>
+
+      <div class="cover-note">
+        "Not a report assembled from secondary sources — a primary record, built forward."
+      </div>
+    </div>
+  </div>
+
+  <div class="cover-bottom-bar">
+    <div class="cover-meta">
+      <div class="meta-item"><strong>Stage</strong>Early Overview</div>
+      <div class="meta-item"><strong>Audience</strong>Co-founders & Partners</div>
+      <div class="meta-item"><strong>Version</strong>1.0</div>
+    </div>
+    <div class="meta-item">01 / 12</div>
+  </div>
+</div>
+
+<!-- CONTENT SLIDE -->
+<div class="slide content-slide">
+  <div class="slide-top">
+    <div class="top-num">02</div>
+    <div class="top-title"><h2>The Problem</h2></div>
+    <div class="top-tag">Market Structure</div>
+  </div>
+
+  <div class="slide-body">
+    <div class="main-col">
+      <div class="lead">
+        The secondary vehicle market systematically misprices risk — penalizing <strong>every honest participant</strong>.
+      </div>
+      <p class="body-p">
+        Buyers make high-value decisions using information they cannot verify. Sellers of well-maintained vehicles cannot credibly prove their care. Quality vehicles are undervalued. Poor vehicles are overpriced.
+      </p>
+      <p class="body-p">
+        Akerlof described this in 1970. Fifty years later, it remains the <strong>operating condition</strong> of the secondary vehicle market — globally.
+      </p>
+      <div class="fn">Akerlof, G. (1970) — "The Market for Lemons: Quality Uncertainty and the Market Mechanism"</div>
+    </div>
+
+    <div class="aside-col">
+      <div class="aside-header">Why current solutions fail</div>
+      <div class="fact-row">
+        <div class="fact-label">Service history portability</div>
+        <div class="fact-verdict bad">None</div>
+      </div>
+      <div class="fact-row">
+        <div class="fact-label">Fabrication difficulty</div>
+        <div class="fact-verdict bad">Trivial</div>
+      </div>
+      <div class="fact-row">
+        <div class="fact-label">History reports create new signal</div>
+        <div class="fact-verdict bad">No</div>
+      </div>
+      <div class="fact-row">
+        <div class="fact-label">Inspection coverage</div>
+        <div class="fact-verdict warn">Snapshot only</div>
+      </div>
+      <div class="fact-row">
+        <div class="fact-label">Primary record exists</div>
+        <div class="fact-verdict bad">No</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="slide-footer">
+    <span class="nav-item active">Problem</span>
+    <span class="nav-item">Insight</span>
+    <span class="nav-item">Architecture</span>
+    <span class="nav-item">Adoption</span>
+    <span class="nav-item">Model</span>
+    <span class="nav-page">02 / 12</span>
+  </div>
+</div>
+
+</body>
+</html>
