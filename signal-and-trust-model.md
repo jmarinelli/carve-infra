@@ -1,4 +1,4 @@
-# 03 — Signal & Trust Model
+# Signal & Trust Model
 ## Vehicle Identity & Secondary Market Trust Layer
 
 - Purpose: Define the economic meaning and structural behavior of the trust signal.

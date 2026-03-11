@@ -1,4 +1,4 @@
-# 01 — Vision & Thesis
+# Vision & Thesis
 ## Vehicle Identity & Secondary Market Trust Layer
 
 *Internal Founder Document — Not for distribution*
@@ -159,4 +159,4 @@ Clarity about scope is as important as clarity about ambition.
 
 ---
 
-*Document 01 — Vision & Thesis v2.0 | Internal Use Only*
+*Vision & Thesis v2.0 | Internal Use Only*

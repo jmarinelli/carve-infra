@@ -1,10 +1,14 @@
-# 05 — Infra MVP PRD
+# Infra MVP PRD (Superseded)
 ## Vehicle Identity & Secondary Market Trust Layer
 
 *Internal Founder Document — Not for distribution*
 *Version: 2.0*
 *Derived from: context-pack.md v0.3 | document-architecture.md v0.2 | incentive-and-adoption-model.md v2.0 | signal-and-trust-model.md v2.0*
 *Consolidated from: infra-mvp-prd-claude.md v1.0 | infra-mvp-prd-gpt.md v1.0*
+
+---
+
+> **Note:** This document describes the original workshop-first MVP design. The project has since pivoted to a verifier-first approach. See the [Verifier-First PRD](work/verifiers/prd.md) for the current build spec, and [Context](work/verifiers/context.md) and [Decisions](work/verifiers/decisions.md) for the pivot rationale. This document is retained as architectural reference — the core entity model, event architecture, and signal integrity constraints informed the current design.
 
 ---
 
@@ -661,6 +665,6 @@ These items are explicitly deferred, not rejected. They should be evaluated agai
 
 ---
 
-*Document 05 — Infra MVP PRD v2.0 | Internal Use Only*
+*Infra MVP PRD v2.0 (Superseded) | Internal Use Only*
 *Dependencies: context-pack.md v0.3 | document-architecture.md v0.2 | incentive-and-adoption-model.md v2.0 | signal-and-trust-model.md v2.0*
 *Consolidated from: infra-mvp-prd-claude.md v1.0 | infra-mvp-prd-gpt.md v1.0*

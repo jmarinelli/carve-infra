@@ -1,9 +1,9 @@
-# 06 — 90-Day Validation Plan
+# 90-Day Validation Plan
 ## Vehicle Identity & Secondary Market Trust Layer
 
 *Internal Founder Document — Not for distribution*
-*Version: 1.0*
-*Derived from: context-pack.md v0.3 | document-architecture.md v0.2 | vision-and-thesis.md v2.0 | incentive-and-adoption-model.md v2.0 | signal-and-trust-model.md v2.0 | business-model-and-monetization.md v2.0*
+*Version: 2.0*
+*Derived from: context-pack.md v0.3 | document-architecture.md v0.2 | vision-and-thesis.md v2.0 | incentive-and-adoption-model.md v3.0 | signal-and-trust-model.md v2.0 | business-model-and-monetization.md v3.0 | work/verifiers/context.md | work/verifiers/decisions.md*
 
 ---
 
@@ -13,9 +13,11 @@ This plan exists to prevent idea drift.
 
 The previous documents establish a coherent thesis, an adoption logic, a signal model, and a business model. None of that matters if the behavioral assumptions underlying them are wrong. This plan operationalizes the discipline of testing whether they are right — before committing significant resources to infrastructure built on unvalidated assumptions.
 
+The verifier-first pivot (see work/verifiers/context.md and work/verifiers/decisions.md) repositions the validation target: the critical behavioral assumptions are now about inspectors, not workshops. The tool value proposition is different (a better report generator, not a CRM), the adoption friction profile is different (tool for existing work vs. workflow change), and the artifact that propagates recognition is different (verified inspection link vs. service certificate).
+
 The 90-day window is not about building the product. It is about answering the hardest feasibility questions using the minimum viable evidence.
 
-The standard for this period is not "does this feel promising?" It is: **"Is there structural evidence that the adoption model is viable, and that the signal can be produced consistently?"**
+The standard for this period is not "does this feel promising?" It is: **"Is there structural evidence that the inspector adoption model is viable, that the tool produces a genuinely superior deliverable, and that the verified artifact generates engagement beyond the inspector's immediate client?"**
 
 If the answer is no, this document defines the conditions under which the project must be killed or fundamentally restructured.
 
@@ -23,332 +25,409 @@ If the answer is no, this document defines the conditions under which the projec
 
 ## 2. The Hypotheses
 
-These are the foundational behavioral assumptions on which the entire architecture rests. Each one is a point of failure.
+These are the foundational behavioral assumptions on which the verifier-first architecture rests. Each one is a point of failure.
 
-### H1 — Workshop Operational Value Is Real
+### H1 — Inspector Tool Value Is Real
 
-**Statement:** Quality-oriented, digitally capable workshops will perceive immediate, tangible operational value from the node panel — independent of any market recognition of the trust signal.
+**Statement:** Inspectors perceive the report generator as a genuine improvement over their current method — faster, more professional, or both. The tool produces a deliverable that the inspector considers superior to their existing Word/PDF template, Google Doc, or ad-hoc report format.
 
-**Why it matters:** Workshops are the supply side. If the operational value proposition is not real and compelling on its own, node-signed event growth flatlines from day one. Everything downstream depends on this.
+**Why it matters:** The entire Phase 1 strategy rests on tool value, not network value. If the tool is not genuinely better than what inspectors use today, the foundational adoption mechanism fails. Unlike the workshop model — where operational value came from multiple sources (job registry, dispute protection, differentiation) — the inspector model concentrates on a single proposition: a better tool for the work they already do. That concentration is a strength (clear pitch) and a risk (single point of failure).
 
-**The honest concern:** Workshops may express interest but fail to integrate the signing workflow into their actual day-to-day operations. Interest ≠ behavioral change. This must be tested against real usage, not stated intent.
-
----
-
-### H2 — Workshop Signing Behavior Persists After Initial Onboarding
-
-**Statement:** Workshops that begin signing events will continue to do so habitually, not just at onboarding. The operational integration is durable, not episodic.
-
-**Why it matters:** Early adoption is cheap to generate. Sustained behavior is what produces signal density. A workshop that signs 5 events and stops is not a node. It is a failed experiment.
-
-**The honest concern:** Onboarding motivation and ongoing behavior are different phenomena. Many products show strong initial activity and rapid drop-off. This plan must be designed to detect that drop-off early.
+**The honest concern:** "Better" is subjective and context-dependent. An inspector with a well-developed personal template may resist switching even if the platform's output is objectively superior. The tool must be better enough to overcome switching inertia — not just marginally different. This must be tested against actual inspector workflows, not assumed from product design.
 
 ---
 
-### H3 — Owners Find Value When Encountering a Pre-Existing History
+### H2 — Inspector Usage Persists After Initial Adoption
 
-**Statement:** When vehicle owners discover that their vehicle already has a node-signed history — because workshops entered events prior to owner claim — they engage meaningfully with the platform rather than treating it as irrelevant.
+**Statement:** Inspectors who begin using the tool continue using it for subsequent inspections without prompting. The tool becomes their default report generation method, not a one-time experiment.
 
-**Why it matters:** Passive accumulation is the structural answer to owner inertia. If owners do not value pre-existing history upon discovery, the passive accumulation mechanism fails and owner activation becomes dependent on proactive evangelism — which does not scale.
+**Why it matters:** A single verified inspection proves the tool works. Sustained usage is what produces signal density. An inspector who uses the tool once and reverts to their template is a failed experiment, not a validated node.
 
-**The honest concern:** Owners may look at the history, shrug, and leave. The system must demonstrate that discovery of prior history converts to claim behavior and ongoing engagement.
+**The honest concern:** Onboarding motivation and ongoing behavior are different phenomena. An inspector may use the tool to evaluate it, produce one report, and decide their existing method is "good enough." The threshold for switching is not whether the tool is better in isolation — it is whether the improvement is sufficient to justify changing an established workflow. This plan must detect reversion early.
 
 ---
 
-### H4 — The LATAM Informality Premium Hypothesis Is Directionally Correct
+### H3 — Verified Links Generate Buyer Engagement
 
-**Statement:** In the target market, a segment of buyers and sellers already perceives documented vehicle history as a meaningful differentiator — even if formalized verification infrastructure does not yet exist. There is latent demand for credible verification, not just stated preference.
+**Statement:** Buyers who receive a verified inspection link — whether directly from an inspector or through a marketplace listing — open it and spend meaningful time on it. The link is treated as a credible information source, not ignored as spam or an unfamiliar artifact.
 
-**Why it matters:** If the market is genuinely indifferent to documentation — if transactions are entirely relational and informal with no appetite for structured proof — the consumer flywheel cannot spin. The trust signal would be valued only at the institutional level, which is a Phase 3 event years away.
+**Why it matters:** The verified inspection link is the primary distribution mechanism. It is how the signal propagates beyond the inspector-client relationship into the broader market. If buyers do not open the link, or open it and bounce immediately, the artifact has no propagation value — it is a better PDF for the inspector but not a signal-building mechanism for the platform.
+
+**The honest concern:** Buyers in secondary vehicle markets are accustomed to low-quality links, scams, and irrelevant marketing. A link from an unfamiliar platform may be dismissed without engagement regardless of its content. The OpenGraph preview must be compelling enough to generate the click, and the report page must be compelling enough to hold attention.
+
+---
+
+### H4 — Market Values Verification
+
+**Statement:** At least some transactions in the target market show organic demand for verifiable inspection documentation. Buyers and sellers reference documentation, history, or verifiability in real transaction contexts — even without the product's intervention.
+
+**Why it matters:** If the market is genuinely indifferent to inspection documentation — if transactions are entirely relational and informal with no appetite for structured proof — the consumer flywheel cannot spin. The verified inspection link would be valuable to inspectors as a tool but would not generate the market recognition needed for Phase 2 expansion.
 
 **The honest concern:** In informal markets, the premium for documentation may be conceptually endorsed and practically ignored. Interviews and surveys will not detect this. Observed transaction behavior will.
 
 ---
 
-### H5 — Workshop Onboarding Friction Is Conquerable in the Initial Target Profile
+### H5 — Inspector Onboarding Is Frictionless
 
-**Statement:** The specific workshop profile being targeted — quality-oriented, digitally capable, client-facing — can complete onboarding and reach their first signed event within one working session, without requiring dedicated technical support.
+**Statement:** An inspector can complete their first verified inspection report within a single session without requiring dedicated technical support. The tool is intuitive enough that the inspector can set up their template, perform an inspection, and generate a verified report without assistance.
 
-**Why it matters:** Time-to-first-signed-event is a direct friction proxy. If it requires multiple sessions, escalation, or significant support overhead, the model cannot scale even if the value proposition is correct.
+**Why it matters:** Time-to-first-verified-report is a direct friction proxy. If it requires multiple sessions, escalation, or significant support overhead, the model cannot scale even if the value proposition is correct. Inspectors are busy professionals — if the tool is not immediately productive, they will revert to their existing method.
 
-**The honest concern:** "Digitally capable" workshops span a wide range. The product must be designed for the lower end of that range, not for tech-forward outliers.
+**The honest concern:** "Single session" depends on what "session" means for different inspectors. Some will dedicate focused time to evaluate the tool. Others will attempt it between jobs with fragmented attention. The tool must work for the second type, not just the first.
 
 ---
 
-## 3. Experiments
+### H6 — Inspector-Workshop Overlap Exists
 
-### Experiment 1 — Workshop Direct Outreach and Operational Pitch
+**Statement:** A meaningful proportion of the inspectors acquired in Phase 1 also operate as workshops — performing vehicle repairs, maintenance, or modifications in addition to inspection services. The boundary between "inspector" and "workshop" is blurry enough in practice that the platform gains a foot in both worlds from Phase 1.
 
-**Objective:** Test whether workshops in the target profile respond positively to the operational value pitch and agree to participate as beta nodes.
+**Why it matters:** The inspector-workshop overlap is the earliest and strongest bridge mechanism to Phase 2. If the overlap is real, the transition from inspectors to workshops is not a separate acquisition challenge — it is a scope expansion within existing users. If the overlap is false — if inspectors and workshops are genuinely distinct populations — the bridge to workshops requires a separate pitch, a separate product adaptation, and a separate validation cycle.
+
+**The honest concern:** The overlap hypothesis is based on market observation, not data. It may be true in some geographies and false in others. It may be true for certain inspector subtypes (mechanics who also do inspections) and false for others (dedicated inspection-only services). This must be probed directly in inspector conversations.
+
+---
+
+## 3. Pre-Build Conversations
+
+Before writing code, structured conversations with market actors resolve open challenges and inform build decisions. These are extracted from the "What Must Be Validated Before Building" sections of each challenge in work/verifiers/decisions.md.
+
+### Inspector Conversations (3–5 inspectors)
+
+These conversations are the most critical pre-build activity. They inform H1, H2, H5, H6, and multiple challenge decisions simultaneously.
+
+**Tool and workflow probe:**
+- How do you produce your inspection report today? What tool/template do you use?
+- How long does it take to produce a report?
+- How do you organize your inspection methodology? What sections, what order, what level of detail?
+- What information do you include today vs. what you would include if the tool made it easy?
+- Show a mockup of the white-label report — do they perceive it as an upgrade or as a threat to their independence?
+
+**Competition and differentiation probe:**
+- Do you feel you compete with less qualified inspectors? How do you differentiate today?
+- Would visible metrics (inspection count, detail level, time operating) address the differentiation problem?
+- How do you feel about sharing a platform with less qualified competitors?
+- What would you consider minimum requirements for someone to be a verifier on the platform?
+
+**Switching and adoption probe:**
+- Would a professional report generator with verified links be useful?
+- What would make you switch from your current method?
+- What would make you NOT switch?
+
+**Workshop overlap probe (H6):**
+- Do you also operate as a workshop (repairs, maintenance, modifications)?
+- If yes: would you use the same tool for documenting vehicle state on arrival (intake inspection)?
+- If no: do you know inspectors who also run workshops?
+
+### Seller Conversations (3–5 recent sellers)
+
+**Pre-sale inspection probe:**
+- Did you consider doing a pre-sale inspection? Why or why not?
+- If you could include a verified inspection link in your listing, would you? Would you pay for it?
+- How much did you sell for? What is the inspection cost as a percentage?
+
+### Buyer Conversations (3–5 recent buyers)
+
+**Inspection and trust probe:**
+- Did you pay for an inspection? How much?
+- Would you trust an inspection commissioned by the seller if you could verify it independently?
+- What would make you trust it? What would make you not trust it?
+- Would you leave a review after purchase if the inspection report had a mechanism for it?
+
+### Agency Conversations (1–2 used car agencies)
+
+**Agency service model probe:**
+- Do you already offer any type of inspection as part of your service?
+- How do you document it?
+- Would a verified, shareable inspection report be valuable as part of your package?
+
+---
+
+## 4. Experiments
+
+### Experiment 1 — Inspector Outreach and Tool Pitch
+
+**Objective:** Test whether inspectors in the target market respond positively to the report generator pitch and agree to participate as beta verifiers.
 
 **Method:**
-- Direct outreach to 20–30 workshops in the initial geographic focus area.
-- Profile filter: independent workshops with some digital infrastructure (invoicing software, WhatsApp for client communication, or equivalent), client-facing positioning, and services where documentation has visible value (major repairs, modifications, performance work, pre-purchase inspections).
-- Pitch is operational only: structured job registry, client-facing service certificates, dispute protection. Do not lead with market signal or trust layer positioning.
-- Measure: what proportion agree to proceed and complete onboarding?
+- Direct outreach to 15–20 inspectors in the initial geographic focus area.
+- Profile filter: established pre-purchase inspection services, alignment specialists, or mechanics who offer inspection as a distinct service. Must have an existing report production method (however informal).
+- Pitch is tool-first: a better report generator that produces professional, verifiable, white-label output. Do not lead with platform, network, or market signal positioning.
+- Measure: what proportion agree to try the tool? What objections arise? Where does the pitch fail?
 
-**Expected learning:** Whether the operational pitch converts qualified workshops, and where the pitch fails or generates objections.
+**Expected learning:** Whether the tool pitch converts qualified inspectors, and whether the value proposition resonates as tool improvement or is perceived as platform adoption (which carries higher resistance).
 
 ---
 
-### Experiment 2 — Time-to-First-Signed-Event Test
+### Experiment 2 — Time-to-First-Verified-Report
 
 **Objective:** Measure actual onboarding friction against the target threshold.
 
 **Method:**
-- For each workshop that agrees to participate, track time from onboarding initiation to completion of first signed ledger event.
-- Observe where sessions stop, where questions arise, where the workflow breaks.
-- Target threshold: first signed event completed within a single working session without escalation.
+- For each inspector that agrees to participate, track time from tool introduction to completion of first verified inspection report.
+- Observe where the session stops, where questions arise, where the workflow breaks.
+- Include template customization in the measurement — the inspector must set up their own inspection structure, not use a generic default.
+- Target threshold: first verified report completed within a single working session without escalation.
 
-**Expected learning:** Concrete friction map. Specific workflow steps that exceed tolerance. Whether the target threshold is achievable with existing or prototype tooling.
-
----
-
-### Experiment 3 — Signing Behavior Persistence Tracking
-
-**Objective:** Determine whether initial workshop signing behavior is sustained over the 90-day window.
-
-**Method:**
-- Track signed event frequency per workshop across weeks 1–12.
-- Segment workshops by profile characteristics and onboarding path.
-- Flag any workshop that has signed events in week 1 but has zero signed events in weeks 5–8.
-- Weekly check-in protocol for inactive workshops: a single structured conversation to understand why signing stopped.
-
-**Expected learning:** Whether behavioral adoption is real or performative. Early warning signal for workshops that will churn.
+**Expected learning:** Concrete friction map. Specific workflow steps that exceed tolerance. Whether template customization adds unacceptable friction or is perceived as a valuable feature.
 
 ---
 
-### Experiment 4 — Passive Accumulation and Owner Discovery Test
+### Experiment 3 — Inspector Usage Persistence
 
-**Objective:** Test whether owners who encounter pre-existing node-signed history engage with the platform at a meaningfully higher rate than owners approaching an empty vehicle identity.
+**Objective:** Determine whether initial inspector tool usage is sustained over the 90-day window.
 
 **Method:**
-- Identify vehicles serviced by beta workshops for which no owner claim exists.
-- Create an owner-facing discovery flow: notification to the vehicle's known owner (via workshop contact or public-facing vehicle page) that their vehicle's history is available.
-- Measure: claim rate, time-to-claim, post-claim engagement (any action taken within 7 days of claim).
-- Control: track owner response to a minimal prompt (basic vehicle identity with no history) versus a history-populated vehicle.
+- Track verified report generation frequency per inspector across weeks 1–12.
+- Segment inspectors by profile characteristics (inspection-only vs. workshop-overlap, digital sophistication, current report method).
+- Flag any inspector that produced a verified report in weeks 1–2 but has zero reports in weeks 5–8.
+- For inactive inspectors: a single structured conversation to understand why usage stopped. Did they revert to their previous method? Was the tool inadequate? Was the friction too high?
 
-**Expected learning:** Whether pre-existing history materially changes owner activation behavior.
+**Expected learning:** Whether tool adoption is real or experimental. Early warning signal for inspectors that will churn. Whether the inspector-workshop overlap correlates with higher or lower persistence.
+
+---
+
+### Experiment 4 — Buyer Engagement with Verified Links
+
+**Objective:** Test whether verified inspection links generate meaningful engagement from buyers who receive them.
+
+**Method:**
+- Track link engagement metrics for all verified reports generated during the 90-day window:
+  - Open rate (did the recipient click the link?).
+  - Time on page (how long did they engage with the report content?).
+  - Return visits (did they come back?).
+  - Sharing behavior (did they forward the link?).
+- Where possible, identify the context in which the link was shared (direct delivery by inspector, posted in marketplace listing, forwarded in WhatsApp conversation).
+- Qualitative probe: in buyer conversations, show a sample verified report link. Does the OpenGraph preview generate curiosity? Does the report page hold attention?
+
+**Expected learning:** Whether the verified link functions as a credible information artifact or is treated as an unfamiliar/ignorable link. Whether marketplace listing context generates higher engagement than direct delivery.
 
 ---
 
 ### Experiment 5 — Observed Transaction Behavior Probe
 
-**Objective:** Test whether verified history or the concept of structured service documentation influences transaction behavior in a real secondary market context.
+**Objective:** Test whether verified history or the concept of structured inspection documentation influences transaction behavior in a real secondary market context.
 
 **Method:**
 - This is qualitative and structured, not quantitative at this stage.
 - Identify 5–10 vehicle transactions in the target market (through seller or buyer contacts) across the 90-day window.
-- In each case, conduct structured post-transaction interviews: Did history documentation come up? Did its presence or absence affect price or negotiation? What format of documentation carried credibility?
+- In each case, conduct structured post-transaction interviews: Did inspection documentation come up? Did its presence or absence affect price or negotiation? What format of documentation carried credibility? Did anyone share a link or document related to vehicle condition?
 - Do not inject the product into transactions. Observe and probe what actually happened.
 
-**Expected learning:** Whether there is organic demand for credible documentation in real transaction contexts — and what form of evidence buyers and sellers currently treat as meaningful.
+**Expected learning:** Whether there is organic demand for credible inspection documentation in real transaction contexts — and what form of evidence buyers and sellers currently treat as meaningful.
 
 ---
 
-### Experiment 6 — Dispute Protection Resonance Test
+### Experiment 6 — Inspector-Workshop Overlap Probe
 
-**Objective:** Determine whether the dispute protection value proposition is a strong independent motivator for workshop adoption, or whether it is a supporting argument.
+**Objective:** Determine whether the inspector-workshop overlap hypothesis (H6) is structurally real in the target market.
 
 **Method:**
-- In outreach conversations with workshops, present the dispute protection argument in isolation — before mentioning any other feature.
-- Prompt: describe a scenario in which a client disputed a service outcome. Ask how it was resolved. Ask whether a signed, timestamped record would have changed the situation.
-- Record whether dispute history is present and whether the protection argument triggers visible recognition.
+- In every inspector conversation and onboarding, explicitly ask: "Do you also operate as a workshop? Do you perform repairs, maintenance, or modifications in addition to inspections?"
+- For inspectors who confirm overlap: probe whether they would use the same tool for intake documentation (documenting vehicle state on arrival before work begins).
+- For inspectors who do not overlap: ask whether they know inspectors in their market who also run workshops.
+- Track the proportion of onboarded inspectors who are also workshops.
 
-**Expected learning:** Whether dispute protection is a primary hook or a reinforcing argument. Determines whether it should lead the pitch or support it.
+**Expected learning:** Whether the overlap is real and prevalent enough to serve as a natural bridge to workshop adoption. If the overlap is below 20% of the initial inspector cohort, the bridge mechanism requires a different approach.
 
 ---
 
-## 4. Metrics
+## 5. Metrics
 
 ### Primary Signal Metric
 
-**Node-signed ledger events per month (from active beta workshops)**
+**Node-signed inspection events per month (from active beta inspectors)**
 This is the single most important operational metric. It captures whether the supply side is functionally working.
 
-Target by end of month 3: a minimum of 3 workshops each signing at least 10 events per month consistently. Total signed events ≥ 100 across the period.
+Target by end of month 3: a minimum of 3 inspectors each producing at least 8 verified reports per month consistently. Total signed inspection events ≥ 80 across the period.
 
 ---
 
 ### Secondary Metrics
 
-**Workshop conversion rate from outreach to first signed event**
-Definition: proportion of workshops contacted that complete at least one signed event.
-Target: ≥ 25% of qualified outreach.
+**Inspector conversion rate from outreach to first verified report**
+Definition: proportion of inspectors contacted that complete at least one verified report.
+Target: ≥ 30% of qualified outreach.
 
-**Time-to-first-signed-event**
-Definition: elapsed time from beginning of onboarding to completion of first signed ledger event.
+**Time-to-first-verified-report**
+Definition: elapsed time from beginning of tool introduction to completion of first verified inspection report (including template setup).
 Target: ≤ 90 minutes within a single working session, without escalation.
 
-**Workshop signing persistence rate**
-Definition: proportion of workshops that signed events in weeks 1–4 who continue to sign events in weeks 5–12.
+**Inspector usage persistence rate**
+Definition: proportion of inspectors that produced verified reports in weeks 1–4 who continue producing reports in weeks 9–12.
 Target: ≥ 70% persistence rate across the cohort.
 
-**Owner claim rate for history-populated vehicles**
-Definition: proportion of identified vehicle owners who claim a vehicle after being notified of existing node-signed history.
-Target: ≥ 30% claim rate within 14 days of notification.
+**Buyer engagement with verified links**
+Definition: open rate and average time on page for verified inspection report links.
+Target: ≥ 40% open rate for links delivered directly to buyers. Average time on page ≥ 60 seconds for opened links.
+
+**Inspector-workshop overlap rate**
+Definition: proportion of onboarded inspectors who also operate as workshops (repairs, maintenance, modifications).
+Target: ≥ 30% of initial inspector cohort. This is not a hard threshold — any overlap is valuable — but below 20% the bridge mechanism requires reassessment.
 
 **Qualitative signal from transaction probes**
-Definition: proportion of observed transactions in which documentation or history was referenced by at least one party.
+Definition: proportion of observed transactions in which inspection documentation or vehicle history was referenced by at least one party.
 Target: ≥ 50% of probed transactions show some documentation reference — regardless of format.
 
 ---
 
 ### Red Flag Indicators (Immediate Attention Required)
 
-- Any workshop that signed events in weeks 1–2 has zero events in weeks 5–6.
-- Average time-to-first-signed-event exceeds 3 hours or requires multiple sessions.
-- More than 50% of outreach conversations result in objections centered on tax visibility or data exposure.
-- Zero owner claims generated from history-populated vehicle notifications in month 2.
-- No transaction probe reveals any organic documentation discussion.
+- Any inspector that produced verified reports in weeks 1–2 has zero reports in weeks 5–6.
+- Average time-to-first-verified-report exceeds 3 hours or requires multiple sessions.
+- More than 50% of outreach conversations result in the inspector perceiving the tool as a platform threat rather than a tool improvement.
+- Buyer open rate for verified links is below 15% across all contexts.
+- Zero of the initial inspector cohort also operates as a workshop.
+- No transaction probe reveals any organic inspection documentation discussion.
 
 These are not kill criteria on their own. They are signals that a specific hypothesis is failing and that immediate diagnostic conversation is required.
 
 ---
 
-## 5. Validation Thresholds
+## 6. Validation Thresholds
 
 The following thresholds define what the 90-day evidence must demonstrate to justify proceeding to MVP build.
 
-### Threshold 1 — Workshop Supply Side Is Functionally Viable
+### Threshold 1 — Inspector Supply Side Is Functionally Viable
 
-**Minimum condition:** At least 3 workshops are consistently signing events at the end of 90 days. Consistently means at least 8 events per month in months 2 and 3, without significant founder intervention required to maintain the behavior.
+**Minimum condition:** At least 3 inspectors are consistently producing verified reports at the end of 90 days. Consistently means at least 6 reports per month in months 2 and 3, without significant founder intervention required to maintain the behavior.
 
-**What this confirms:** The operational value proposition is real and the adoption sequence is functionally sound at small scale.
+**What this confirms:** The tool value proposition is real and the inspector adoption sequence is functionally sound at small scale.
 
 ---
 
 ### Threshold 2 — Onboarding Friction Is Within Manageable Range
 
-**Minimum condition:** The median time-to-first-signed-event is under 90 minutes, achieved within a single session, for at least 5 workshops.
+**Minimum condition:** The median time-to-first-verified-report is under 90 minutes, achieved within a single session, for at least 4 inspectors.
 
 **What this confirms:** The onboarding path can be standardized and scaled without a high-touch support dependency.
 
 ---
 
-### Threshold 3 — Signing Behavior Persists Without Active Maintenance
+### Threshold 3 — Inspector Usage Persists Without Active Maintenance
 
-**Minimum condition:** At least 70% of workshops that signed events in weeks 1–4 continue signing in weeks 9–12 without requiring founder-initiated prompting.
+**Minimum condition:** At least 70% of inspectors that produced verified reports in weeks 1–4 continue producing reports in weeks 9–12 without requiring founder-initiated prompting.
 
-**What this confirms:** The operational integration is real, not performative. The value is sufficient to sustain behavior beyond the novelty of onboarding.
+**What this confirms:** The tool integration is real, not performative. The value is sufficient to sustain behavior beyond the novelty of initial adoption.
 
 ---
 
-### Threshold 4 — Owner Discovery Generates Nonzero Engagement
+### Threshold 4 — Verified Links Generate Nonzero Buyer Engagement
 
-**Minimum condition:** At least 30% of owners notified of a pre-existing history claim their vehicle within 14 days. At least one claimed vehicle shows post-claim engagement (event proposal, sharing, or further interaction) within 7 days.
+**Minimum condition:** At least 30% of verified inspection links delivered to buyers are opened. Of those opened, average time on page exceeds 45 seconds. At least one instance of a verified link appearing in a marketplace listing or being forwarded by a buyer to a third party.
 
-**What this confirms:** The passive accumulation mechanism creates a meaningful foundation for owner activation. The discovery moment converts.
+**What this confirms:** The verified report artifact functions as an information source that buyers engage with, not a link they ignore. The artifact has propagation potential beyond the inspector-client pair.
 
 ---
 
 ### Threshold 5 — Latent Demand Signal Is Directionally Present
 
-**Minimum condition:** In structured transaction probes, at least 3 of the 5–10 observed transactions include unprompted reference to documentation, history, or verifiability in any form. This does not need to reference the product — it must reveal that the problem exists behaviorally.
+**Minimum condition:** In structured transaction probes, at least 3 of the 5–10 observed transactions include unprompted reference to inspection, documentation, or verifiability in any form. This does not need to reference the product — it must reveal that the problem exists behaviorally.
 
 **What this confirms:** There is organic demand for the signal's underlying function, even if buyers and sellers do not yet have a structured way to access it.
 
 ---
 
-## 6. Kill Criteria
+## 7. Kill Criteria
 
 These are conditions under which the project must be restructured or stopped. They are not reasons to pivot to a slightly different version of the same thesis. They are structural invalidations.
 
-### Kill Criterion 1 — Workshop Signing Behavior Collapses
+### Kill Criterion 1 — Inspector Tool Adoption Fails
 
-**Condition:** By the end of month 3, fewer than 2 workshops are actively signing events (defined as at least 5 events in the final 30-day period), AND outreach to additional workshops has not produced a qualified pipeline of candidates willing to onboard.
+**Condition:** By the end of month 3, fewer than 2 inspectors are actively producing verified reports (defined as at least 4 reports in the final 30-day period), AND outreach to additional inspectors has not produced a qualified pipeline of candidates willing to try the tool.
 
-**What it means:** The supply side is not viable. Without consistent node-signed events, there is no signal. Without signal, there is no product. Operating value proposition is insufficient or workshop profile is wrong.
+**What it means:** The tool value proposition is not real. Inspectors do not perceive the report generator as a genuine improvement over their current method. Without inspector adoption, there are no signed events, no verified links, and no foundation for any subsequent phase.
 
-**Required response:** Full stop. Do not proceed to MVP build. Conduct structured post-mortems with all participating workshops. The question to answer: was the value proposition wrong, or was the target profile wrong? If profile, refine and retest. If value proposition, the fundamental adoption model requires revision before further investment.
-
----
-
-### Kill Criterion 2 — Signing Persistence Falls Below Acceptable Threshold
-
-**Condition:** Fewer than 50% of workshops that signed events in weeks 1–4 continue signing in weeks 9–12, despite founder intervention and active troubleshooting.
-
-**What it means:** Initial adoption is not translating into durable behavior. The system is producing onboarding behavior, not operational integration. The product is not sufficiently embedded in the workshop's actual workflow.
-
-**Required response:** Do not proceed to MVP build until a revised operational flow or deeper workflow integration is designed and tested with a new cohort.
+**Required response:** Full stop. Do not proceed to MVP build. Conduct structured post-mortems with all participating inspectors. The question to answer: was the tool not good enough (product problem), or was the target profile wrong (market problem)? If product, redesign and retest. If market, the verifier-first adoption model requires fundamental revision.
 
 ---
 
-### Kill Criterion 3 — Owner Discovery Generates No Meaningful Response
+### Kill Criterion 2 — Inspector Usage Persistence Collapses
 
-**Condition:** Owner claim rate from history-populated vehicle notifications is below 10%, and post-claim engagement is zero across the full 90-day window.
+**Condition:** Fewer than 50% of inspectors that produced verified reports in weeks 1–4 continue producing reports in weeks 9–12, despite founder engagement and active troubleshooting.
 
-**What it means:** The passive accumulation mechanism does not activate owners. The discovery moment does not convert. If owners are indifferent to pre-existing verified history, the flywheel's consumer leg is broken. Owner adoption would require proactive evangelism at a cost and velocity that does not scale.
+**What it means:** Initial adoption is not translating into durable behavior. The tool is interesting enough to try but not good enough to keep. The inspector reverts to their existing method because the switching cost exceeds the perceived improvement.
 
-**Required response:** This does not kill the workshop-only model, but it kills the assumption that owner network effects will develop organically. Business model must be reassessed: can the product sustain itself as a B2B workshop tool without consumer-side traction? If yes, pivot the thesis accordingly. If no, stop.
+**Required response:** Do not proceed to MVP build until the tool's competitive advantage over existing methods is identified and strengthened. Conduct structured exit interviews with every inspector who reverted. The question is specific: what did they go back to, and why was it better?
+
+---
+
+### Kill Criterion 3 — Verified Links Generate No Buyer Engagement
+
+**Condition:** Buyer open rate for verified inspection links is below 10% across all contexts (direct delivery, marketplace listing, forwarded), AND average time on page for opened links is below 20 seconds.
+
+**What it means:** The verified report artifact does not function as a credible information source in the buyer's context. The link is treated as noise. Without buyer engagement, the artifact has no propagation value — the inspector gets a better tool, but the platform gets no signal distribution. The tool becomes a standalone product, not infrastructure.
+
+**Required response:** This does not necessarily kill the project, but it kills the assumption that verified links will propagate market recognition organically. If the tool is valuable to inspectors (Thresholds 1–3 met) but the artifact does not travel (Threshold 4 failed), the business model must be reassessed: can the company sustain itself as an inspector SaaS tool without consumer-side signal propagation? If yes, pivot the thesis accordingly. If no, the distribution mechanism requires fundamental redesign.
 
 ---
 
 ### Kill Criterion 4 — Transaction Probes Reveal No Organic Demand for Documentation
 
-**Condition:** Across 5–10 structured transaction probes, fewer than 2 transactions reveal any organic reference to documentation, history, or verifiability. Buyers and sellers operate in a purely relational, informal mode with no apparent appetite for structured evidence.
+**Condition:** Across 5–10 structured transaction probes, fewer than 2 transactions reveal any organic reference to inspection documentation, history, or verifiability. Buyers and sellers operate in a purely relational, informal mode with no apparent appetite for structured evidence.
 
 **What it means:** The LATAM informality premium hypothesis is wrong for the target segment and geography. The demand for the signal does not exist at the consumer level — at least not in the near term.
 
-**Required response:** Reassess the consumer thesis. If institutional demand is structurally real but consumer demand is not, the adoption model must be rebuilt around workshop-to-institution pathways without relying on consumer-facing transaction signals. This requires a fundamental rewrite of the incentive model before further investment.
+**Required response:** Reassess the consumer thesis. If institutional demand is structurally real but consumer demand is not, the adoption model must be rebuilt around inspector-to-institution pathways without relying on consumer-facing transaction signals. This requires a fundamental rewrite of the incentive model before further investment.
 
 ---
 
-### Kill Criterion 5 — Tax Visibility Objection Is Systemic
+### Kill Criterion 5 — Inspector-Workshop Overlap Is Zero
 
-**Condition:** More than 60% of outreach conversations with target-profile workshops raise tax visibility or fiscal exposure as a primary objection to participation — not an incidental concern, but a blocking concern.
+**Condition:** None of the inspectors acquired in the 90-day window also operate as workshops. The inspector and workshop populations are genuinely distinct with no natural bridge between them.
 
-**What it means:** The target market's informal economy dynamics are more constraining than anticipated. The workshop profile must be narrowed to formally compliant operations, which may represent too small a segment to build meaningful coverage from.
+**What it means:** This does not kill the project. But it elevates the risk of Challenge 9 (the transition from inspectors to workshops) from "natural bridge" to "separate acquisition challenge requiring its own validation." The workshop bridge can no longer be assumed to emerge from the inspector base — it requires a distinct pitch, a distinct entry mechanism, and a distinct validation cycle.
 
-**Required response:** Before stopping, test whether narrowing to fully formal, compliant workshops (certified shops, dealer service centers, established inspection centers) generates a viable cohort. If that narrower profile can produce the same signal density, the model survives with a revised target profile. If it cannot produce density, the adoption model is fundamentally broken in the target geography.
+**Required response:** Do not stop the project. But do not assume the workshop bridge will happen organically. Before committing to Phase 2 workshop expansion, design and validate a standalone workshop acquisition strategy — likely centered on the intake inspection pitch to workshops that are not inspectors. Factor the additional acquisition cost and timeline into Phase 2 planning.
 
 ---
 
-## 7. Iteration Cycles
+## 8. Iteration Cycles
 
 The 90-day window is structured into three 30-day cycles, each with a defined focus and decision gate.
 
 ---
 
-### Cycle 1 — Days 1–30: Outreach, Onboarding, and First Evidence
+### Cycle 1 — Days 1–30: Pre-Build Conversations, Outreach, and First Evidence
 
-**Objective:** Produce the first node-signed ledger events in a live environment. Establish initial workshop cohort.
+**Objective:** Complete pre-build conversations. Produce the first verified inspection reports in a live environment. Establish initial inspector cohort.
 
 **Activities:**
-- Complete outreach to 20–30 target workshops.
-- Onboard 5–8 willing participants as beta nodes.
-- Track time-to-first-signed-event for each.
-- Conduct dispute protection resonance conversations during onboarding.
-- Deploy initial vehicle-centric public verification pages.
-- Begin passive vehicle history accumulation.
+- Complete pre-build conversations: 3–5 inspectors, 3–5 sellers, 3–5 buyers, 1–2 agencies (Section 3).
+- Complete outreach to 15–20 target inspectors.
+- Onboard 4–6 willing participants as beta verifiers.
+- Track time-to-first-verified-report for each.
+- Probe inspector-workshop overlap in every conversation (Experiment 6).
+- Deploy initial verified inspection report pages with OpenGraph previews.
+- Begin tracking buyer engagement with verified links.
 
 **Decision gate at Day 30:**
-- Is at least one workshop signing events consistently?
-- Is the onboarding flow producing first events within the target threshold?
-- Are there blocking objections appearing in outreach conversations that require pitch revision?
+- Is at least one inspector producing verified reports consistently?
+- Is the onboarding flow producing first reports within the target threshold?
+- Are there blocking objections appearing in outreach conversations that require pitch or tool revision?
+- What proportion of onboarded inspectors also operate as workshops?
 
-If zero workshops are signing events by day 30, cycle 2 cannot proceed as designed. Diagnosis required immediately.
+If zero inspectors are producing verified reports by day 30, cycle 2 cannot proceed as designed. Diagnosis required immediately.
 
 ---
 
-### Cycle 2 — Days 31–60: Persistence Testing and Owner Discovery
+### Cycle 2 — Days 31–60: Persistence Testing and Buyer Engagement
 
-**Objective:** Determine whether workshop signing behavior is durable. Begin testing owner discovery mechanism.
+**Objective:** Determine whether inspector usage is durable. Begin measuring buyer engagement with verified links at meaningful volume.
 
 **Activities:**
-- Continue monitoring signing frequency for all onboarded workshops.
-- Flag any workshop with declining event frequency and conduct structured diagnostic conversation.
-- Identify vehicles with accumulated node-signed history and no owner claim.
-- Deploy owner notification flow for 10–15 unclaimed vehicles.
+- Continue monitoring report generation frequency for all onboarded inspectors.
+- Flag any inspector with declining report frequency and conduct structured diagnostic conversation.
+- Accumulate buyer engagement data: open rates, time on page, sharing behavior.
 - Begin transaction probes: identify 3–5 secondary market transactions to observe.
 - Collect first iteration of transaction probe data.
+- For inspector-workshop overlap actors: probe whether they would use the tool for intake documentation.
 
 **Decision gate at Day 60:**
-- Is workshop signing behavior stable or declining across the cohort?
-- Has at least one owner claimed a vehicle after receiving history notification?
+- Is inspector usage stable or declining across the cohort?
+- Are verified links generating nonzero buyer engagement?
 - Are transaction probes generating any useful qualitative data?
 
-If workshop signing has materially declined by day 60 without a clear recoverable cause, kill criterion 2 may be approaching. Escalate assessment.
+If inspector usage has materially declined by day 60 without a clear recoverable cause, kill criterion 2 may be approaching. Escalate assessment.
 
 ---
 
@@ -357,67 +436,74 @@ If workshop signing has materially declined by day 60 without a clear recoverabl
 **Objective:** Accumulate final evidence against all validation thresholds. Make go/no-go decision.
 
 **Activities:**
-- Final 30-day signing frequency measurement for all workshops.
+- Final 30-day report generation frequency measurement for all inspectors.
 - Complete remaining transaction probes (target total: 5–10).
-- Compile full owner claim and post-claim engagement data.
-- Conduct structured exit interviews with any workshop that stopped signing.
-- Draft preliminary signal integrity assessment: are the events produced structurally consistent and manipulation-resistant in observed practice?
+- Compile full buyer engagement data (open rates, time on page, sharing, return visits).
+- Conduct structured exit interviews with any inspector that stopped using the tool.
+- Compile inspector-workshop overlap data and assess bridge viability.
+- Draft preliminary signal integrity assessment: are the verified reports produced structurally consistent and manipulation-resistant in observed practice?
 - Compile full evidence summary against each validation threshold.
 
 **Decision gate at Day 90:**
 - Have validation thresholds 1–5 been met?
 - If not, which specific kill criteria apply?
-- If partial, what is the precise diagnosis and what minimal additional evidence is required before MVP build?
+- What is the inspector-workshop overlap rate, and what does it imply for Phase 2 planning?
+- If proceeding: specific unresolved risks to carry forward and monitor in MVP phase.
+- If not proceeding: precise diagnosis of which assumptions failed and what evidence would be required to revisit.
 
 ---
 
-## 8. What This Plan Does Not Validate
+## 9. What This Plan Does Not Validate
 
-This 90-day plan is scoped to validate the behavioral assumptions underlying early adoption. It does not validate:
+This 90-day plan is scoped to validate the behavioral assumptions underlying inspector-first adoption. It does not validate:
 
+- **Workshop adoption.** Workshop onboarding is a Phase 2 event. The overlap probe (H6) provides early signal, but full workshop validation requires a separate cycle once inspector traction is demonstrated.
 - **Institutional demand.** This is a Phase 3 event. No meaningful institutional validation is expected or targeted in 90 days.
-- **Report revenue.** The Official Vehicle Report is not being monetized in this window. It is being structurally designed, but transaction-grade revenue is not a 90-day expectation.
+- **Monetization.** Revenue in Phase 1 is zero by design (see business-model-and-monetization.md v3.0). This plan validates traction, not revenue. Monetization paths are enabled by Phase 1 traction, not designed during Phase 1.
 - **Signal recognition at scale.** Coverage density at scale cannot be validated in 90 days. The objective is to validate that the supply-side mechanism works, not that it has reached recognition.
+- **The seller-pays model inversion.** Whether sellers will commission and pay for pre-sale inspections with verified links is a behavioral change that may take years to materialize. This plan does not test it — it maintains the existing buyer-pays dynamic and observes whether seller-pays behavior emerges organically.
 - **Competitive response.** The plan does not attempt to map or test competitor reaction. It is too early for that signal to be meaningful.
 
 Attempting to validate these things in 90 days would produce noise, not signal. The plan is scoped to what can actually be tested in this window.
 
 ---
 
-## 9. Operating Discipline
+## 10. Operating Discipline
 
 ### On Data Interpretation
 
-The most dangerous outcome is misreading weak evidence as validation. Workshops expressing enthusiasm in a conversation is not validation. A single owner claiming a vehicle is not validation. One transaction where history was mentioned is not validation.
+The most dangerous outcome is misreading weak evidence as validation. An inspector expressing enthusiasm about the mockup is not validation. A single buyer clicking a verified link is not validation. One transaction where inspection was mentioned is not validation.
 
 Each threshold is defined to prevent this. The plan must be evaluated against thresholds as written — not against the best-case reading of ambiguous evidence.
 
 ### On Founder Involvement
 
-Any signing behavior that requires regular founder prompting to sustain is not validated behavior. It is managed behavior. The thresholds are defined against autonomous adoption. The plan must actively test whether workshops sign events when the founder is not watching, not just when they are.
+Any tool usage that requires regular founder prompting to sustain is not validated behavior. It is managed behavior. The thresholds are defined against autonomous adoption. The plan must actively test whether inspectors use the tool when the founder is not watching, not just when they are.
 
 ### On Negative Evidence
 
-Negative evidence — workshops that do not adopt, owners that do not engage, transactions where history is irrelevant — is as valuable as positive evidence. The temptation to explain it away must be resisted. Every instance of non-adoption deserves a structured diagnosis, not a rationalization.
+Negative evidence — inspectors that do not adopt, buyers that do not click, transactions where documentation is irrelevant — is as valuable as positive evidence. The temptation to explain it away must be resisted. Every instance of non-adoption deserves a structured diagnosis, not a rationalization.
 
 ### On Iteration Within the 90 Days
 
-Tactical adjustments to the pitch, onboarding flow, or owner notification approach are expected and appropriate within cycles. Strategic adjustments to the core thesis — the event model, the signing authority model, the credibility gradient — are not within scope. If 90-day evidence suggests strategic-level changes are required, that is a kill or restructure signal, not an iteration signal.
+Tactical adjustments to the pitch, onboarding flow, report template, or OpenGraph preview are expected and appropriate within cycles. Strategic adjustments to the core thesis — the verifier-first approach, the tool-value proposition, the verified link as distribution mechanism — are not within scope. If 90-day evidence suggests strategic-level changes are required, that is a kill or restructure signal, not an iteration signal.
 
 ---
 
-## 10. Output of This Plan
+## 11. Output of This Plan
 
 At day 90, the output is a single structured assessment document covering:
 
-1. Evidence state against each hypothesis (H1–H5).
+1. Evidence state against each hypothesis (H1–H6).
 2. Evidence state against each validation threshold (1–5).
 3. Whether any kill criteria have been triggered.
-4. If proceeding: specific unresolved risks to carry forward and monitor in MVP phase.
-5. If not proceeding: precise diagnosis of which assumptions failed and what evidence would be required to revisit.
+4. Inspector-workshop overlap assessment and implications for Phase 2 bridge strategy.
+5. Pre-build conversation synthesis: key findings from inspector, seller, buyer, and agency conversations that inform build decisions for each challenge (per work/verifiers/decisions.md).
+6. If proceeding: specific unresolved risks to carry forward and monitor in MVP phase.
+7. If not proceeding: precise diagnosis of which assumptions failed and what evidence would be required to revisit.
 
-This document becomes the foundation for the MVP PRD brief or the project restructure decision.
+This document becomes the foundation for the verifier-first MVP build or the project restructure decision.
 
 ---
 
-*Document 06 — 90-Day Validation Plan v1.0 | Internal Use Only*
+*90-Day Validation Plan v2.0 | Internal Use Only*

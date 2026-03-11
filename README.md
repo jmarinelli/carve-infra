@@ -20,11 +20,28 @@ What the trust signal is and how it works. Defines Verification Coverage, credib
 ### 4. [Business Model & Monetization](business-model-and-monetization.md)
 Revenue logic derived from the thesis, incentive model, and signal model. Covers who pays, in what form, and how monetization evolves from operational tooling to institutional data access.
 
-### 5. [Infra MVP PRD](infra-mvp-prd.md)
-The first build. Defines core entities, the event proposal vs. ledger model, signing flow, inspection events, permissions, and the minimum infrastructure needed to instantiate the trust signal.
-
-### 6. [90-Day Validation Plan](90-day-validation-plan.md)
+### 5. [90-Day Validation Plan](90-day-validation-plan.md)
 Operationalizes startup discipline. Lists core hypotheses, experiments, validation thresholds, and kill criteria to test behavioral assumptions before committing to full infrastructure.
 
-### 7. [One-Pager](one-pager.md)
+### 6. [One-Pager](one-pager.md)
 A concise overview of the problem, solution, and opportunity — intended for co-founders, investors, and strategic partners.
+
+### Superseded
+
+- **[Infra MVP PRD](infra-mvp-prd.md)** — Original workshop-first MVP design. Superseded by the verifier-first PRD. Retained as architectural reference — the core entity model, event architecture, and signal integrity constraints informed the current build spec.
+
+---
+
+## Working Documents
+
+### Verifier-First MVP
+
+- **[Context](work/verifiers/context.md)** — Critical re-evaluation of the original MVP approach. Documents the pivot from a workshop-first infrastructure build to a verifier-first strategy, including rationale, flywheel mechanics, 10 open challenges with candidate solutions, and adapted validation plan.
+- **[Decisions](work/verifiers/decisions.md)** — Resolved positions for each challenge. What gets built, what is deferred, and what must be validated. Living document, updated as decisions are made.
+- **[PRD](work/verifiers/prd.md)** — Product Requirements Document for the verifier-first MVP. Defines the system architecture (Event-based ledger with detail tables per type, N:N user-node model), data entities, features by actor, principal flows, explicit exclusions, success metrics, and technical considerations. This is the actionable build spec.
+- **[Ideas](work/ideas.md)** — Explorations and hypotheses requiring further validation before committing to the roadmap.
+
+### Pitches
+
+- **[Co-founders & Investors — EN](pitches/cofounders-investors-en.md)** | **[ES](pitches/cofounders-investors-es.md)** — 30-second and 60-second elevator pitches for early-stage conversations.
+- **[Inspectors — EN](pitches/inspectors-en.md)** | **[ES](pitches/inspectors-es.md)** — 30-second and 60-second pitches for Phase 1 inspector outreach.
